@@ -1,4 +1,5 @@
 mod init;
+pub mod patient;
 
 use rusqlite::Connection;
 
