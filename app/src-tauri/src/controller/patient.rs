@@ -16,10 +16,10 @@ pub fn read_patients() -> Result<Vec<patient::Patient>, String> {
 }
 
 #[tauri::command]
-pub fn read_patient(id: i32) -> Result<patient::Patient, String> {
+pub fn read_patient(id: i32) -> Result<Vec<patient::Patient>, String> {
   let db = init_database()?;
-  let patient = patient::read_one(&db, id)?;
-  Ok(patient)
+  let patients = patient::read_one(&db, id)?;
+  Ok(patients)
 }
 
 #[tauri::command]
