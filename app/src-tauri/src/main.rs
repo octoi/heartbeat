@@ -3,6 +3,7 @@
   windows_subsystem = "windows"
 )]
 
+mod controller;
 mod database;
 
 fn main() {
