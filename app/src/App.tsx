@@ -1,5 +1,13 @@
-import { useState } from 'react';
+import { Button, useColorMode } from '@chakra-ui/react';
 
 export default function App() {
-  return <div className='App'></div>;
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  return (
+    <div className='App'>
+      <Button onClick={toggleColorMode}>
+        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+      </Button>
+    </div>
+  );
 }
