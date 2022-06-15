@@ -1,13 +1,25 @@
-import { Button, useColorMode } from '@chakra-ui/react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ChakraWrapper } from './components/ChakraWrapper';
+import { Header } from './components/header';
+import HomePage from './pages';
+import EditPage from './pages/edit';
+import SettingsPage from './pages/settings';
 
 export default function App() {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   return (
-    <div className='App'>
-      <Button onClick={toggleColorMode}>
-        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-      </Button>
+    <div className='p-3'>
+      <ChakraWrapper>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/settings' element={<SettingsPage />} />
+            <Route path='/edit' element={<EditPage />}>
+              <Route path=':id' element={<EditPage />} />
+            </Route>
+          </Routes>
+        </Router>
+      </ChakraWrapper>
     </div>
   );
 }
