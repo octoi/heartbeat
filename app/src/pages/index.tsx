@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { HomePageContent } from '../components/home';
 
 export default function HomePage() {
-  return <div></div>;
+  return <HomePageContent />;
 }
