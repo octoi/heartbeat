@@ -1,9 +1,9 @@
 import React from 'react';
-import Logo from '../../../logo.svg';
-import { Link } from 'react-router-dom';
+import Logo from '../logo.svg';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { FiSun } from 'react-icons/fi';
 import {
+  Avatar,
   Button,
   Drawer,
   DrawerBody,
@@ -22,14 +22,12 @@ export const LogoDrawer: React.FC = () => {
 
   return (
     <>
-      <Link to='/'>
-        <img
-          src={Logo}
-          alt='Heartbeat'
-          className='w-12 h-12 hover:opacity-75 transition-all duration-200'
-          onClick={onOpen}
-        />
-      </Link>
+      <Avatar
+        src={Logo}
+        name='Heartbeat'
+        className='hover:opacity-75 transition-all duration-200 border-none cursor-pointer'
+        onClick={onOpen}
+      />
       <Drawer isOpen={isOpen} onClose={onClose} placement='left' size='xs'>
         <DrawerOverlay />
         <DrawerContent>
