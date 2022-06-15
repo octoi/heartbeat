@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Flex, Input } from '@chakra-ui/react';
 import { IoMdPersonAdd } from 'react-icons/io';
-import { LogoDrawer } from './logoDrawer';
+import { LogoDrawer } from '../logoDrawer';
 import { Link } from 'react-router-dom';
 
 export const Header: React.FC = () => {
@@ -19,6 +19,7 @@ export const Header: React.FC = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+
       <Link to='/edit'>
         <Button size='lg' colorScheme='teal'>
           <IoMdPersonAdd className='mr-2' />
