@@ -14,14 +14,14 @@ export const Header: React.FC = () => {
         placeholder='Search...'
         type='text'
         variant='filled'
-        size='lg'
+        size='md'
         mx={3}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
 
       <Link to='/edit'>
-        <Button size='lg' colorScheme='teal'>
+        <Button size='md' colorScheme='teal'>
           <IoMdPersonAdd className='mr-2' />
           New patient
         </Button>
