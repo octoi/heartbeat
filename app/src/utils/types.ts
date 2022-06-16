@@ -11,9 +11,9 @@ export interface PatientBioData {
   age?: string;
   sex?: string;
   address?: string;
-  height?: number;
-  weight?: number;
-  bmi?: number;
+  height?: string;
+  weight?: string;
+  bmi?: string;
   allergyToMedicine?: {
     status?: boolean;
     medicines?: string;
@@ -26,19 +26,20 @@ export interface PatientBioData {
 }
 
 export interface PatientVitals {
-  pulseRate?: number;
+  pulseRate?: string;
   bloodPressure?: {
-    systolic?: number;
-    diastolic?: number;
+    systolic?: string;
+    diastolic?: string;
   };
-  respiratoryRate?: number;
-  oxygenSaturation?: number;
+  respiratoryRate?: string;
+  oxygenSaturation?: string;
 }
 
 export interface PatientSystemicExamination {
   rs?: string;
   cvs?: string;
   git?: string;
+  cns?: string;
   musculoskeletal?: string;
   provisionalOrFindDiagnosis?: string;
   ddsIfAny?: string;

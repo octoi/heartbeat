@@ -14,13 +14,13 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 
-interface Prop {
+interface Props {
   patientData: PatientData;
   setPatientData: SetState<PatientData>;
   loading?: boolean;
 }
 
-export const BioData: React.FC<Prop> = ({
+export const BioData: React.FC<Props> = ({
   patientData,
   setPatientData,
   loading,
@@ -39,7 +39,7 @@ export const BioData: React.FC<Prop> = ({
   const [weight, setWeight] = useState(
     patientBioData?.weight?.toString() || ''
   );
-  const [bmi, setBmi] = useState(patientBioData?.bmi || 0);
+  const [bmi, setBmi] = useState(patientBioData?.bmi || '0');
   const [allergyToMedicines, setAllergyToMedicines] = useState(
     patientBioData?.allergyToMedicine?.status || false
   );
@@ -67,7 +67,7 @@ export const BioData: React.FC<Prop> = ({
     const weightNumber = Number(weight);
 
     const bmi = weightNumber / (heightNumber * heightNumber);
-    setBmi(Number(bmi.toFixed(2)));
+    setBmi(bmi.toFixed(2));
   }, [height, weight]);
 
   useEffect(() => {
@@ -76,8 +76,8 @@ export const BioData: React.FC<Prop> = ({
       age,
       sex,
       address,
-      height: Number(height),
-      weight: Number(weight),
+      height: height,
+      weight: weight,
       bmi,
       allergyToMedicine: {
         status: allergyToMedicines,
