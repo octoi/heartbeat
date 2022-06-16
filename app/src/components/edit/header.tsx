@@ -14,7 +14,12 @@ export const Header: React.FC = () => {
         </Heading>
       </Flex>
       <Link to='/'>
-        <IconButton aria-label='close' icon={<CgClose />} colorScheme='red' />
+        <IconButton
+          aria-label='close'
+          icon={<CgClose />}
+          colorScheme='red'
+          size='md'
+        />
       </Link>
     </Flex>
   );
