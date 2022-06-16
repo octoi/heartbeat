@@ -24,6 +24,8 @@ export const LogoDrawer: React.FC = () => {
     <>
       <Avatar
         src={Logo}
+        width='40px'
+        height='40px'
         name='Heartbeat'
         className='hover:opacity-75 transition-all duration-200 border-none cursor-pointer'
         onClick={onOpen}
@@ -35,7 +37,7 @@ export const LogoDrawer: React.FC = () => {
           <DrawerHeader>Settings</DrawerHeader>
 
           <DrawerBody>
-            <Button onClick={toggleColorMode}>
+            <Button onClick={toggleColorMode} width='full'>
               Toggle{' '}
               {colorMode === 'light' ? (
                 <>
