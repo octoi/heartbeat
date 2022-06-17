@@ -5,5 +5,5 @@ export default function EditPage() {
   const params = useParams();
   let id = params?.id;
 
-  return <EditPageContent />;
+  return id ? <EditPageContent patientId={Number(id)} /> : <EditPageContent />;
 }

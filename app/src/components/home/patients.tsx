@@ -14,6 +14,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 interface Props {
   patients: Patient[];
@@ -24,6 +25,7 @@ export const Patients: React.FC<Props> = ({ patients, loading }) => {
   return (
     <div className='mt-5'>
       {loading && <p>Loading ...</p>}
+      {patients.length === 0 && <p>No patients</p>}
       {!loading && patients.length !== 0 && (
         <TableContainer>
           <Table variant='striped'>
@@ -52,12 +54,14 @@ export const Patients: React.FC<Props> = ({ patients, loading }) => {
                     <Td>{patientData?.bioData?.name}</Td>
                     <Td>{moment(patientData?.updatedAt).fromNow()}</Td>
                     <Td>
-                      <IconButton
-                        aria-label='Edit patient'
-                        variant='ghost'
-                        colorScheme='blue'
-                        icon={<FiEdit />}
-                      />
+                      <Link to={`/edit/${patient.id}`}>
+                        <IconButton
+                          aria-label='Edit patient'
+                          variant='ghost'
+                          colorScheme='blue'
+                          icon={<FiEdit />}
+                        />
+                      </Link>
                     </Td>
                     <Td>
                       <IconButton
