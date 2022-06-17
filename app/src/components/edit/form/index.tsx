@@ -1,21 +1,26 @@
+import React, { useState } from 'react';
 import { Button, SimpleGrid, useToast } from '@chakra-ui/react';
-import { invoke } from '@tauri-apps/api/tauri';
-import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PatientData, SetState } from '../../../utils/types';
+import { PatientData } from '../../../utils/types';
 import { BioData } from './bioData';
 import { ExaminationForm } from './examination';
+import { createPatient, updatePatient } from './helper';
+import { invoke } from '@tauri-apps/api/tauri';
 
 interface Props {
   patientId?: number;
+  patientOldData?: PatientData;
 }
 
-export const EditForm: React.FC<Props> = ({ patientId }) => {
+export const EditForm: React.FC<Props> = ({ patientId, patientOldData }) => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const [patientData, setPatientData] = useState<PatientData>({});
+  const [patientData, setPatientData] = useState<PatientData>(
+    patientOldData || {}
+  );
   const [loading, setLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const saveToDatabase = () => {
     if (patientData?.bioData?.name?.trim().length === 0) {
@@ -33,28 +38,28 @@ export const EditForm: React.FC<Props> = ({ patientId }) => {
     setLoading(true);
 
     if (patientId) {
-      return;
+      updatePatient(patientId, patientData, toast, setLoading);
+    } else {
+      createPatient(patientData, navigate, toast, setLoading);
     }
+  };
 
-    let data: PatientData = {
-      ...patientData,
-      createdAt: patientData.createdAt ? patientData.createdAt : Date.now(),
-      updatedAt: Date.now(),
-    };
+  const deletePatient = () => {
+    setDeleteLoading(true);
 
-    invoke('create_patient', {
-      data: JSON.stringify(data),
+    invoke('delete_patient', {
+      id: patientId,
     })
       .then(() => {
-        navigate('/', { replace: false });
         toast({
-          title: 'Saved patient data successfully',
-          description: `${patientData?.bioData?.name} is in your list now :)`,
+          title: `Say bye to ${patientData.bioData?.name}`,
+          description: 'Deleted patient data successfully',
           duration: 3000,
           isClosable: true,
           position: 'top-right',
           status: 'success',
         });
+        navigate('/', { replace: false });
       })
       .catch((err) => {
         toast({
@@ -67,7 +72,7 @@ export const EditForm: React.FC<Props> = ({ patientId }) => {
         });
       })
       .finally(() => {
-        setLoading(false);
+        setDeleteLoading(false);
       });
   };
 
@@ -76,26 +81,46 @@ export const EditForm: React.FC<Props> = ({ patientId }) => {
       <BioData
         patientData={patientData}
         setPatientData={setPatientData}
-        loading={loading}
+        loading={loading || deleteLoading}
       />
       <div className='my-5' />
       <ExaminationForm
         patientData={patientData}
         setPatientData={setPatientData}
-        loading={loading}
+        loading={loading || deleteLoading}
       />
-      <SimpleGrid my={5} columns={{ sm: 1, lg: 2 }} gap={2}>
+      <SimpleGrid
+        my={5}
+        columns={{ sm: 1, md: 2, lg: patientId ? 3 : 2 }}
+        gap={2}
+      >
         <Button
           colorScheme='blue'
           size='md'
           isLoading={loading}
           onClick={saveToDatabase}
+          disabled={deleteLoading}
         >
           Save To Database
         </Button>
-        <Button colorScheme='teal' size='md' disabled={loading}>
+        <Button
+          colorScheme='teal'
+          size='md'
+          disabled={loading || deleteLoading}
+        >
           Preview
         </Button>
+        {patientId && (
+          <Button
+            colorScheme='red'
+            size='md'
+            disabled={loading}
+            isLoading={deleteLoading}
+            onClick={deletePatient}
+          >
+            Delete Patient
+          </Button>
+        )}
       </SimpleGrid>
     </div>
   );
