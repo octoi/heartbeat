@@ -16,7 +16,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-export const Header: React.FC = () => {
+interface Props {
+  title?: string;
+}
+
+export const Header: React.FC<Props> = ({ title }) => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef() as React.MutableRefObject<any>;
@@ -28,7 +32,7 @@ export const Header: React.FC = () => {
       <Flex alignItems='center'>
         <LogoDrawer />
         <Heading className='text-2xl font-bold' ml={3}>
-          New patient
+          {title || 'New patient'}
         </Heading>
       </Flex>
       <IconButton
