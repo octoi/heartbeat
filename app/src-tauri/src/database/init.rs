@@ -7,7 +7,7 @@ pub fn connect_database<P: AsRef<Path>>(database_path: P) -> Result<Connection> 
   conn.execute(
     "CREATE TABLE IF NOT EXISTS patient (
       id integer primary key,
-      data text,
+      data text
     )",
     [],
   )?;
