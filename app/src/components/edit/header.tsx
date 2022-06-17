@@ -25,7 +25,7 @@ export const Header: React.FC<Props> = ({ title }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef() as React.MutableRefObject<any>;
 
-  const redirect = () => navigate('/', { replace: false });
+  const redirect = () => navigate('/', { replace: true });
 
   return (
     <Flex alignItems='center' justifyContent='space-between'>

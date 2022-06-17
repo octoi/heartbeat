@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import { Patient, PatientData } from '../../utils/types';
 import { FiEdit } from 'react-icons/fi';
 import { RiEyeLine } from 'react-icons/ri';
@@ -14,7 +15,6 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
 
 interface Props {
   patients: Patient[];
@@ -64,12 +64,14 @@ export const Patients: React.FC<Props> = ({ patients, loading }) => {
                       </Link>
                     </Td>
                     <Td>
-                      <IconButton
-                        aria-label='View patient'
-                        variant='ghost'
-                        colorScheme='teal'
-                        icon={<RiEyeLine />}
-                      />
+                      <Link to={`/preview/${patient.id}`}>
+                        <IconButton
+                          aria-label='View patient'
+                          variant='ghost'
+                          colorScheme='teal'
+                          icon={<RiEyeLine />}
+                        />
+                      </Link>
                     </Td>
                   </Tr>
                 );

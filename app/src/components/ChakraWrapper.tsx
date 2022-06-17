@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactComponent } from '../utils/types';
 import {
   ChakraProvider,

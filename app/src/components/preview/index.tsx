@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { PatientData } from '../../utils/types';
 import { useToast } from '@chakra-ui/react';
-import { EditForm } from './form';
-import { Header } from './header';
 import { useNavigate } from 'react-router-dom';
-import { getPatient } from './helper';
+import { PatientData } from '../../utils/types';
+import { getPatient } from '../edit/helper';
+import { Header } from './header';
 
 interface Props {
-  patientId?: number;
+  patientId: number;
 }
 
-export const EditPageContent: React.FC<Props> = ({ patientId }) => {
+export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -18,8 +17,6 @@ export const EditPageContent: React.FC<Props> = ({ patientId }) => {
   const [patientData, setPatientData] = useState<PatientData>({});
 
   useEffect(() => {
-    if (!patientId) return;
-
     setLoading(true);
 
     getPatient(patientId, toast)
@@ -35,13 +32,9 @@ export const EditPageContent: React.FC<Props> = ({ patientId }) => {
   }, []);
 
   return (
-    <section>
-      <Header title={patientId ? 'Edit patient' : ''} />
+    <div>
+      <Header />
       {loading && <p>Loading ...</p>}
-      {!patientId && <EditForm />}
-      {patientId && !loading && (
-        <EditForm patientId={patientId} patientOldData={patientData} />
-      )}
-    </section>
+    </div>
   );
 };

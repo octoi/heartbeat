@@ -50,7 +50,7 @@ export const DeleteButton: React.FC<Props> = ({
           position: 'top-right',
           status: 'success',
         });
-        navigate('/', { replace: false });
+        navigate('/', { replace: true });
       })
       .catch((err) => {
         toast({
