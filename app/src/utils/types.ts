@@ -54,6 +54,8 @@ export interface PatientExamination {
 export interface PatientData {
   bioData?: PatientBioData;
   examination?: PatientExamination;
+  createdAt?: number;
+  updatedAt?: number;
 }
 
 export interface Patient {

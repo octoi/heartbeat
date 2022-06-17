@@ -36,8 +36,14 @@ export const EditForm: React.FC<Props> = ({ patientId }) => {
       return;
     }
 
+    let data: PatientData = {
+      ...patientData,
+      createdAt: patientData.createdAt ? patientData.createdAt : Date.now(),
+      updatedAt: Date.now(),
+    };
+
     invoke('create_patient', {
-      data: JSON.stringify(patientData),
+      data: JSON.stringify(data),
     })
       .then(() => {
         navigate('/', { replace: false });
