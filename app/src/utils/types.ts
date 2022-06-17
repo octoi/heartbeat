@@ -60,5 +60,5 @@ export interface PatientData {
 
 export interface Patient {
   id: number;
-  data: PatientData;
+  data: string;
 }

@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Flex, Input } from '@chakra-ui/react';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { LogoDrawer } from '../logoDrawer';
 import { Link } from 'react-router-dom';
+import { SetState } from '../../utils/types';
 
-export const Header: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+interface Props {
+  searchQuery: string;
+  setSearchQuery: SetState<string>;
+}
 
+export const Header: React.FC<Props> = ({ searchQuery, setSearchQuery }) => {
   return (
     <Flex alignItems='center'>
       <LogoDrawer />
