@@ -17,7 +17,7 @@ export const createPatient = (
     data: JSON.stringify(data),
   })
     .then(() => {
-      navigate('/', { replace: false });
+      navigate('/', { replace: true });
       toast({
         title: 'Saved patient data successfully',
         description: `${patientData?.bioData?.name} is in your list now :)`,
