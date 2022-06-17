@@ -1,11 +1,13 @@
 import { Button, SimpleGrid } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { PatientData } from '../../../utils/types';
+import React, { useEffect, useState } from 'react';
+import { PatientData, SetState } from '../../../utils/types';
 import { BioData } from './bioData';
 import { ExaminationForm } from './examination';
 
-export const EditForm: React.FC = () => {
-  const [patientData, setPatientData] = useState<PatientData>({});
+interface Props {}
+
+export const EditForm: React.FC<Props> = () => {
+  const [patientData, setPatientData] = useState({});
   const [loading, setLoading] = useState(false);
 
   return (
