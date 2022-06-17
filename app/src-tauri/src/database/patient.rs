@@ -22,17 +22,22 @@ pub fn read_all(db: &Connection) -> Result<Vec<Patient>, String> {
     Err(_) => return Err(String::from("Failed to load patients")),
   };
 
-  let _ = match sql_query.query_map([], |row| {
-    let patient = Patient {
+  let patient_iter = match sql_query.query_map([], |row| {
+    Ok(Patient {
       id: row.get(0)?,
       data: row.get(1)?,
-    };
-    patient_vec.push(patient);
-    Ok(())
+    })
   }) {
     Ok(patient_iter) => patient_iter,
     Err(_) => return Err(String::from("Failed to load patients")),
   };
+
+  for patient in patient_iter {
+    match patient {
+      Ok(patient_data) => patient_vec.push(patient_data),
+      Err(_) => continue,
+    }
+  }
 
   Ok(patient_vec)
 }
@@ -46,17 +51,22 @@ pub fn read_one(db: &Connection, id: i32) -> Result<Vec<Patient>, String> {
     Err(_) => return Err(String::from("Failed to load patient")),
   };
 
-  let _ = match sql_query.query_map(&[&id], |row| {
-    let patient = Patient {
+  let patient_iter = match sql_query.query_map(&[&id], |row| {
+    Ok(Patient {
       id: row.get(0)?,
       data: row.get(1)?,
-    };
-    patient_vec.push(patient);
-    Ok(())
+    })
   }) {
     Ok(patient_iter) => patient_iter,
     Err(_) => return Err(String::from("Failed to load patient")),
   };
+
+  for patient in patient_iter {
+    match patient {
+      Ok(patient_data) => patient_vec.push(patient_data),
+      Err(_) => continue,
+    }
+  }
 
   Ok(patient_vec)
 }
