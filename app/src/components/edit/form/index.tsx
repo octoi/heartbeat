@@ -5,7 +5,7 @@ import { PatientData } from '../../../utils/types';
 import { BioData } from './bioData';
 import { ExaminationForm } from './examination';
 import { createPatient, updatePatient } from './helper';
-import { invoke } from '@tauri-apps/api/tauri';
+import { DeleteButton } from './DeleteButton';
 
 interface Props {
   patientId?: number;
@@ -44,38 +44,6 @@ export const EditForm: React.FC<Props> = ({ patientId, patientOldData }) => {
     }
   };
 
-  const deletePatient = () => {
-    setDeleteLoading(true);
-
-    invoke('delete_patient', {
-      id: patientId,
-    })
-      .then(() => {
-        toast({
-          title: `Say bye to ${patientData.bioData?.name}`,
-          description: 'Deleted patient data successfully',
-          duration: 3000,
-          isClosable: true,
-          position: 'top-right',
-          status: 'success',
-        });
-        navigate('/', { replace: false });
-      })
-      .catch((err) => {
-        toast({
-          title: err,
-          description: 'Please try again or report this as bug',
-          duration: 3000,
-          isClosable: true,
-          position: 'top-right',
-          status: 'error',
-        });
-      })
-      .finally(() => {
-        setDeleteLoading(false);
-      });
-  };
-
   return (
     <div className='mt-5'>
       <BioData
@@ -111,15 +79,13 @@ export const EditForm: React.FC<Props> = ({ patientId, patientOldData }) => {
           Preview
         </Button>
         {patientId && (
-          <Button
-            colorScheme='red'
-            size='md'
+          <DeleteButton
             disabled={loading}
             isLoading={deleteLoading}
-            onClick={deletePatient}
-          >
-            Delete Patient
-          </Button>
+            setDeleteLoading={setDeleteLoading}
+            patientId={patientId}
+            patientName={patientData?.bioData?.name || ''}
+          />
         )}
       </SimpleGrid>
     </div>
