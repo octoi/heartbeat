@@ -51,9 +51,22 @@ export interface PatientExamination {
   systemicExamination?: PatientSystemicExamination;
 }
 
+export interface PatientMedicine {
+  medicineName: string;
+  frequency: string;
+  time: string;
+  duration: string;
+}
+
+export interface PatientAdvice {
+  medicines?: PatientMedicine[];
+  advice?: string;
+}
+
 export interface PatientData {
   bioData?: PatientBioData;
   examination?: PatientExamination;
+  advice?: PatientAdvice;
   createdAt?: number;
   updatedAt?: number;
 }

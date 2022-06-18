@@ -54,7 +54,9 @@ export const Header: React.FC<Props> = ({ title }) => {
               Are you sure ?
             </AlertDialogHeader>
 
-            <AlertDialogBody>You will loose all changes</AlertDialogBody>
+            <AlertDialogBody>
+              You will loose all changes, If you forgot to save it
+            </AlertDialogBody>
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
