@@ -58,14 +58,16 @@ export const Advice: React.FC<Props> = ({
         setMedicines={setMedicines}
         loading={loading}
       />
-      <Textarea
-        mt={3}
-        variant='filled'
-        placeholder='Advice'
-        value={advice}
-        onChange={(e) => setAdvice(e.target.value)}
-        disabled={loading}
-      />
+      <div className='mt-3'>
+        <h2 className='mb-2 text-md'>Advice</h2>
+        <Textarea
+          variant='filled'
+          placeholder='Advice'
+          value={advice}
+          onChange={(e) => setAdvice(e.target.value)}
+          disabled={loading}
+        />
+      </div>
     </div>
   );
 };
