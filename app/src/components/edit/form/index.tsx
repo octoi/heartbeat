@@ -6,6 +6,7 @@ import { BioData } from './bioData';
 import { ExaminationForm } from './examination';
 import { createPatient, updatePatient } from './helper';
 import { DeleteButton } from './DeleteButton';
+import { Advice } from './advice';
 
 interface Props {
   patientId?: number;
@@ -53,6 +54,12 @@ export const EditForm: React.FC<Props> = ({ patientId, patientOldData }) => {
       />
       <div className='my-5' />
       <ExaminationForm
+        patientData={patientData}
+        setPatientData={setPatientData}
+        loading={loading || deleteLoading}
+      />
+      <div className='my-5' />
+      <Advice
         patientData={patientData}
         setPatientData={setPatientData}
         loading={loading || deleteLoading}
