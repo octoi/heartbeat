@@ -27,8 +27,6 @@ export const BioData: React.FC<Props> = ({
 }) => {
   let patientBioData = patientData?.bioData;
 
-  console.log(patientBioData?.allergyToMedicine?.status);
-
   const [name, setName] = useState(patientBioData?.name || '');
   const [age, setAge] = useState(patientBioData?.age || '');
   const [sex, setSex] = useState(patientBioData?.sex || '');
