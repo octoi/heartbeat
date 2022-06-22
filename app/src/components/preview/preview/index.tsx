@@ -3,6 +3,8 @@ import { PatientData } from '../../../utils/types';
 import { Center } from '@chakra-ui/react';
 import { WaterMark } from './waterMark';
 import { BioData } from './bioData';
+import { Examination } from './examination';
+import { Advice } from './advice';
 
 interface Props {
   patientData: PatientData;
@@ -24,6 +26,8 @@ export const Preview: React.FC<Props> = ({ patientData, printContentRef }) => {
             bioData={patientData.bioData || {}}
             createdAt={patientData.createdAt || 0}
           />
+          <Examination examination={patientData.examination || {}} />
+          <Advice advice={patientData.advice || {}} />
         </div>
       </div>
     </Center>

@@ -18,6 +18,7 @@ export interface PatientBioData {
     status?: boolean;
     medicines?: string;
   };
+  diagnosis?: string;
   chiefComplaint?: string;
   pastMedicalHistory?: string;
   personalHistory?: string;
@@ -41,7 +42,6 @@ export interface PatientSystemicExamination {
   git?: string;
   cns?: string;
   musculoskeletal?: string;
-  provisionalOrFindDiagnosis?: string;
   ddsIfAny?: string;
 }
 
