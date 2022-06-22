@@ -44,6 +44,7 @@ export const BioData: React.FC<Props> = ({
   const [allergyMedicines, setAllergyMedicines] = useState(
     patientBioData?.allergyToMedicine?.medicines || ''
   );
+  const [diagnosis, setDiagnosis] = useState(patientBioData?.diagnosis || '');
   const [chiefComplaint, setChiefComplaint] = useState(
     patientBioData?.chiefComplaint || ''
   );
@@ -81,6 +82,7 @@ export const BioData: React.FC<Props> = ({
         status: allergyToMedicines,
         medicines: allergyMedicines,
       },
+      diagnosis,
       chiefComplaint,
       pastMedicalHistory,
       personalHistory,
@@ -104,6 +106,7 @@ export const BioData: React.FC<Props> = ({
     bmi,
     allergyToMedicines,
     allergyMedicines,
+    diagnosis,
     chiefComplaint,
     pastMedicalHistory,
     personalHistory,
@@ -227,6 +230,16 @@ export const BioData: React.FC<Props> = ({
             />
           </div>
         )}
+      </div>
+      <div className='mt-3'>
+        <h2 className='mb-2 text-md'>Provisional/Find diagnosis</h2>
+        <Textarea
+          variant='filled'
+          placeholder='Address'
+          value={diagnosis}
+          onChange={(e) => setDiagnosis(e.target.value)}
+          disabled={loading}
+        />
       </div>
       <SimpleGrid mt={3} columns={{ sm: 1, lg: 2 }} gap={2}>
         <div>

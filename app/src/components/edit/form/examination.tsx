@@ -56,9 +56,6 @@ export const ExaminationForm: React.FC<Props> = ({
   const [musculoskeletal, setMusculoskeletal] = useState(
     patientSystemicExamination?.musculoskeletal || ''
   );
-  const [provisionalOrFindDiagnosis, setProvisionalOrFindDiagnosis] = useState(
-    patientSystemicExamination?.provisionalOrFindDiagnosis || ''
-  );
   const [ddsIfAny, setDdsIfAny] = useState(
     patientSystemicExamination?.ddsIfAny || ''
   );
@@ -81,7 +78,6 @@ export const ExaminationForm: React.FC<Props> = ({
         git,
         cns,
         musculoskeletal,
-        provisionalOrFindDiagnosis,
         ddsIfAny,
       },
     };
@@ -104,7 +100,6 @@ export const ExaminationForm: React.FC<Props> = ({
     git,
     cns,
     musculoskeletal,
-    provisionalOrFindDiagnosis,
     ddsIfAny,
   ]);
 
@@ -250,16 +245,6 @@ export const ExaminationForm: React.FC<Props> = ({
             placeholder='Musculoskeletal'
             value={musculoskeletal}
             onChange={(e) => setMusculoskeletal(e.target.value)}
-            disabled={loading}
-          />
-        </div>
-        <div>
-          <h2 className='mb-2 text-md'>Provisional/Find diagnosis</h2>
-          <Textarea
-            variant='filled'
-            placeholder='Provisional/Find diagnosis'
-            value={provisionalOrFindDiagnosis}
-            onChange={(e) => setProvisionalOrFindDiagnosis(e.target.value)}
             disabled={loading}
           />
         </div>
