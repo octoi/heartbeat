@@ -42,6 +42,8 @@ export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
     onBeforeGetContent() {
       setPrintLoading(true);
     },
+    pageStyle:
+      '@page { size: auto;  margin: 0mm; margin-top: 10px; margin-bottom: 50px; } @media print { body { -webkit-print-color-adjust: exact; } }',
     onAfterPrint() {
       setPrintLoading(false);
     },
