@@ -29,7 +29,7 @@ export const BioData: React.FC<Props> = ({
 
   const [name, setName] = useState(patientBioData?.name || '');
   const [age, setAge] = useState(patientBioData?.age || '');
-  const [sex, setSex] = useState(patientBioData?.sex || '');
+  const [sex, setSex] = useState(patientBioData?.sex || 'Male');
   const [address, setAddress] = useState(patientBioData?.address || '');
   const [height, setHeight] = useState(
     patientBioData?.height?.toString() || ''
