@@ -7,6 +7,23 @@ interface Props {
 }
 
 export const Examination: React.FC<Props> = ({ examination }) => {
+  const check =
+    examination.generalExamination ||
+    (examination.vitals &&
+      (examination.vitals.bloodPressure ||
+        examination.vitals.oxygenSaturation ||
+        examination.vitals.pulseRate ||
+        examination.vitals.respiratoryRate)) ||
+    (examination.systemicExamination &&
+      (examination.systemicExamination.cns ||
+        examination.systemicExamination.cvs ||
+        examination.systemicExamination.ddsIfAny ||
+        examination.systemicExamination.git ||
+        examination.systemicExamination.musculoskeletal ||
+        examination.systemicExamination.rs));
+
+  if (!check) return null;
+
   return (
     <div className='mt-5'>
       <h2 className='text-xl font-semibold mb-3'>EXAMINATION</h2>
@@ -29,12 +46,14 @@ export const Examination: React.FC<Props> = ({ examination }) => {
                     {examination.vitals.pulseRate && (
                       <>Pulse: {examination.vitals.pulseRate} /min</>
                     )}
-                    {examination.vitals.bloodPressure && (
-                      <>
-                        , BP: {examination.vitals.bloodPressure.systolic}/
-                        {examination.vitals.bloodPressure.diastolic} mmHg
-                      </>
-                    )}
+                    {examination.vitals.bloodPressure &&
+                      examination.vitals.bloodPressure.systolic &&
+                      examination.vitals.bloodPressure.diastolic && (
+                        <>
+                          , BP: {examination.vitals.bloodPressure.systolic}/
+                          {examination.vitals.bloodPressure.diastolic} mmHg
+                        </>
+                      )}
                     {examination.vitals.oxygenSaturation && (
                       <>, SPO2: {examination.vitals.oxygenSaturation}%</>
                     )}
