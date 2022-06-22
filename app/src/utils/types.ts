@@ -42,7 +42,6 @@ export interface PatientSystemicExamination {
   git?: string;
   cns?: string;
   musculoskeletal?: string;
-  // provisionalOrFindDiagnosis?: string;
   ddsIfAny?: string;
 }
 

@@ -87,38 +87,34 @@ export const BioData: React.FC<Props> = ({ bioData, createdAt }) => {
         checkString(bioData.treatmentHistory)) && (
         <LightMode>
           <Table mt={3} variant='striped'>
-            <Thead>
-              <Th>title</Th>
-              <Th>content</Th>
-            </Thead>
             <Tbody>
               {bioData.chiefComplaint && (
                 <Tr>
-                  <Td>CHIEF COMPLAINT</Td>
+                  <Td fontWeight='medium'>CHIEF COMPLAINT</Td>
                   <Td>{bioData.chiefComplaint}</Td>
                 </Tr>
               )}
               {bioData.pastMedicalHistory && (
                 <Tr>
-                  <Td>PAST MEDICAL HISTORY</Td>
+                  <Td fontWeight='medium'>PAST MEDICAL HISTORY</Td>
                   <Td>{bioData.pastMedicalHistory}</Td>
                 </Tr>
               )}
               {bioData.personalHistory && (
                 <Tr>
-                  <Td>PERSONAl HISTORY</Td>
+                  <Td fontWeight='medium'>PERSONAl HISTORY</Td>
                   <Td>{bioData.personalHistory}</Td>
                 </Tr>
               )}
               {bioData.familyHistory && (
                 <Tr>
-                  <Td>FAMILY HISTORY</Td>
+                  <Td fontWeight='medium'>FAMILY HISTORY</Td>
                   <Td>{bioData.familyHistory}</Td>
                 </Tr>
               )}
               {bioData.treatmentHistory && (
                 <Tr>
-                  <Td>TREATMENT HISTORY</Td>
+                  <Td fontWeight='medium'>TREATMENT HISTORY</Td>
                   <Td>{bioData.treatmentHistory}</Td>
                 </Tr>
               )}
