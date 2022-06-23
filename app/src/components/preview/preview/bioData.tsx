@@ -48,8 +48,13 @@ export const BioData: React.FC<Props> = ({
                   {bioData.age} {bioData.sex && ' / ' + bioData.sex[0]}
                 </Td>
               )}
-              {bioData.height && <Td>{bioData.height}</Td>}
-              {bioData.weight && <Td>{bioData.weight}</Td>}
+              {bioData.height && (
+                <Td>
+                  {bioData.height}
+                  {bioData.heightUnit}
+                </Td>
+              )}
+              {bioData.weight && <Td>{bioData.weight}Kg</Td>}
               {bioData.height && bioData.weight && <Td>{bioData.bmi}</Td>}
             </Tr>
           </Tbody>

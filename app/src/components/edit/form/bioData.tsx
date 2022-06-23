@@ -92,6 +92,8 @@ export const BioData: React.FC<Props> = ({
       age,
       sex,
       address,
+      heightUnit:
+        HeightUnit[heightUnit][0] == 'C' ? 'Cm' : HeightUnit[heightUnit][0],
       height: height,
       weight: weight,
       bmi,
@@ -119,6 +121,7 @@ export const BioData: React.FC<Props> = ({
     age,
     sex,
     address,
+    heightUnit,
     height,
     weight,
     bmi,
