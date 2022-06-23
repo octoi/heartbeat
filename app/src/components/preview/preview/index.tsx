@@ -5,6 +5,7 @@ import { WaterMark } from './waterMark';
 import { BioData } from './bioData';
 import { Examination } from './examination';
 import { Advice } from './advice';
+import { Footer } from './footer';
 
 interface Props {
   patientData: PatientData;
@@ -28,6 +29,9 @@ export const Preview: React.FC<Props> = ({ patientData, printContentRef }) => {
           />
           <Examination examination={patientData.examination || {}} />
           <Advice advice={patientData.advice || {}} />
+
+          <div className='w-full bg-black h-0.5 opacity-20 my-5' />
+          <Footer />
         </div>
       </div>
     </Center>
