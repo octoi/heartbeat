@@ -92,6 +92,8 @@ export const BioData: React.FC<Props> = ({
       age,
       sex,
       address,
+      heightUnit:
+        HeightUnit[heightUnit][0] == 'C' ? 'Cm' : HeightUnit[heightUnit][0],
       height: height,
       weight: weight,
       bmi,
@@ -119,6 +121,7 @@ export const BioData: React.FC<Props> = ({
     age,
     sex,
     address,
+    heightUnit,
     height,
     weight,
     bmi,
@@ -190,7 +193,13 @@ export const BioData: React.FC<Props> = ({
       </SimpleGrid>
       <SimpleGrid mt={3} columns={{ sm: 1, md: 2, lg: 3 }} gap={2}>
         <div>
-          <h2 className='mb-2 text-md'>Height (M)</h2>
+          <h2 className='mb-2 text-md'>
+            Height (
+            {HeightUnit[heightUnit][0] == 'C'
+              ? 'CM'
+              : HeightUnit[heightUnit][0]}
+            )
+          </h2>
           <Flex alignItems='center' justifyContent='space-between'>
             <NumberInput
               placeholder='Height'

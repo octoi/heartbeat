@@ -48,8 +48,13 @@ export const BioData: React.FC<Props> = ({
                   {bioData.age} {bioData.sex && ' / ' + bioData.sex[0]}
                 </Td>
               )}
-              {bioData.height && <Td>{bioData.height}</Td>}
-              {bioData.weight && <Td>{bioData.weight}</Td>}
+              {bioData.height && (
+                <Td>
+                  {bioData.height}
+                  {bioData.heightUnit}
+                </Td>
+              )}
+              {bioData.weight && <Td>{bioData.weight}Kg</Td>}
               {bioData.height && bioData.weight && <Td>{bioData.bmi}</Td>}
             </Tr>
           </Tbody>
@@ -81,7 +86,7 @@ export const BioData: React.FC<Props> = ({
         <div className='mt-3'>
           <h2 className='text-xl font-medium'>REMARKS</h2>
           <Text mt={2} fontSize='lg' className='font-medium'>
-            {bioData.diagnosis}
+            {bioData.remark.toUpperCase()}
           </Text>
         </div>
       )}

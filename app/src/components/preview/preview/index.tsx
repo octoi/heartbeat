@@ -30,7 +30,7 @@ export const Preview: React.FC<Props> = ({
 
           <BioData
             bioData={patientData.bioData || {}}
-            createdAt={patientData.createdAt || 0}
+            createdAt={patientData.createdAt || Date.now()}
             tableVariant={tableVariant}
           />
           <Examination

@@ -11,6 +11,7 @@ interface Props {
   printLoading: boolean;
   tableVariant: string;
   setTableVariant: SetState<string>;
+  onClose?: any;
 }
 
 export const Header: React.FC<Props> = ({
@@ -18,6 +19,7 @@ export const Header: React.FC<Props> = ({
   printLoading,
   tableVariant,
   setTableVariant,
+  onClose,
 }) => {
   return (
     <Flex alignItems='center' justifyContent='space-between'>
@@ -48,14 +50,25 @@ export const Header: React.FC<Props> = ({
           onClick={printContent}
           isLoading={printLoading}
         />
-        <Link to='/'>
+        {!onClose && (
+          <Link to='/'>
+            <IconButton
+              aria-label='close'
+              icon={<CgClose />}
+              size='md'
+              disabled={printLoading}
+            />
+          </Link>
+        )}
+        {onClose && (
           <IconButton
             aria-label='close'
             icon={<CgClose />}
             size='md'
             disabled={printLoading}
+            onClick={onClose}
           />
-        </Link>
+        )}
       </Flex>
     </Flex>
   );

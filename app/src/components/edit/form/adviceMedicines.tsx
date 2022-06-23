@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { PatientData, PatientMedicine, SetState } from '../../../utils/types';
+import { PatientMedicine, SetState } from '../../../utils/types';
 import { FaRegTrashAlt, FaPlus } from 'react-icons/fa';
 import {
-  Button,
   IconButton,
   Input,
-  PinInput,
-  PinInputField,
   Select,
   Table,
   TableContainer,
@@ -38,7 +35,7 @@ export const AdviceMedicines: React.FC<Props> = ({
       ...medicines,
       {
         medicineName,
-        frequency: frequency.split('').join(' / '),
+        frequency,
         time,
         duration,
       },
@@ -102,18 +99,14 @@ export const AdviceMedicines: React.FC<Props> = ({
                 />
               </Td>
               <Td>
-                <PinInput
-                  type='number'
+                <Input
+                  placeholder='Frequency'
+                  variant='filled'
+                  size='md'
                   value={frequency}
-                  onChange={setFrequency}
-                >
-                  <PinInputField />
-                  <PinInputField />
-                  <PinInputField />
-                  <PinInputField />
-                  <PinInputField />
-                  <PinInputField />
-                </PinInput>
+                  onChange={(e) => setFrequency(e.target.value)}
+                  disabled={loading}
+                />
               </Td>
               <Td>
                 <Select

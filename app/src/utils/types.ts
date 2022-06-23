@@ -11,6 +11,7 @@ export interface PatientBioData {
   age?: string;
   sex?: string;
   address?: string;
+  heightUnit?: string;
   height?: string;
   weight?: string;
   bmi?: string;
@@ -35,6 +36,7 @@ export interface PatientVitals {
   };
   respiratoryRate?: string;
   oxygenSaturation?: string;
+  temperature?: string;
 }
 
 export interface PatientSystemicExamination {

@@ -43,6 +43,9 @@ export const ExaminationForm: React.FC<Props> = ({
   const [diastolic, setDiastolic] = useState(
     patientBloodPressure?.diastolic || ''
   );
+  const [temperature, setTemperature] = useState(
+    patientVitals?.temperature || ''
+  );
   const [respiratoryRate, setRespiratoryRate] = useState(
     patientVitals?.respiratoryRate || ''
   );
@@ -70,6 +73,7 @@ export const ExaminationForm: React.FC<Props> = ({
           diastolic,
         },
         oxygenSaturation,
+        temperature,
         respiratoryRate,
       },
       systemicExamination: {
@@ -95,6 +99,7 @@ export const ExaminationForm: React.FC<Props> = ({
     diastolic,
     respiratoryRate,
     oxygenSaturation,
+    temperature,
     rs,
     cvs,
     git,
@@ -169,6 +174,23 @@ export const ExaminationForm: React.FC<Props> = ({
             size='md'
             value={respiratoryRate}
             onChange={(value) => setRespiratoryRate(value)}
+            isDisabled={loading}
+          >
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+        </div>
+        <div>
+          <h2 className='mb-2 text-md'>Temperature (°F)</h2>
+          <NumberInput
+            placeholder='Temperature'
+            variant='filled'
+            size='md'
+            value={temperature}
+            onChange={setTemperature}
             isDisabled={loading}
           >
             <NumberInputField />
