@@ -45,21 +45,33 @@ export const Examination: React.FC<Props> = ({ examination, tableVariant }) => {
                   <Td fontWeight='medium'>VITALS</Td>
                   <Td>
                     {examination.vitals.pulseRate && (
-                      <>Pulse: {examination.vitals.pulseRate} /min</>
+                      <>Pulse: {examination.vitals.pulseRate} /min, </>
                     )}
                     {examination.vitals.bloodPressure &&
                       examination.vitals.bloodPressure.systolic &&
                       examination.vitals.bloodPressure.diastolic && (
                         <>
-                          , BP: {examination.vitals.bloodPressure.systolic}/
-                          {examination.vitals.bloodPressure.diastolic} mmHg
+                          BP: {examination.vitals.bloodPressure.systolic}/
+                          {examination.vitals.bloodPressure.diastolic} mmHg,{' '}
+                        </>
+                      )}
+
+                    {examination.vitals.bloodPressure &&
+                      examination.vitals.bloodPressure.systolic &&
+                      !examination.vitals.bloodPressure.diastolic && (
+                        <>
+                          BP: {examination.vitals.bloodPressure.systolic}{' '}
+                          Systolic,{' '}
                         </>
                       )}
                     {examination.vitals.oxygenSaturation && (
-                      <>, SPO2: {examination.vitals.oxygenSaturation}%</>
+                      <>SPO2: {examination.vitals.oxygenSaturation}%, </>
+                    )}
+                    {examination.vitals.temperature && (
+                      <>Temp: {examination.vitals.temperature}°F, </>
                     )}
                     {examination.vitals.respiratoryRate && (
-                      <>, RR: {examination.vitals.respiratoryRate} /min</>
+                      <>RR: {examination.vitals.respiratoryRate} /min</>
                     )}
                   </Td>
                 </Tr>

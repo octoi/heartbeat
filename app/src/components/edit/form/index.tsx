@@ -11,7 +11,6 @@ import {
   Button,
   Drawer,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
   SimpleGrid,
   useDisclosure,
@@ -120,9 +119,9 @@ export const EditForm: React.FC<Props> = ({ patientId, patientOldData }) => {
       >
         <DrawerOverlay />
         <DrawerContent overflowY='scroll'>
-          <DrawerHeader>
+          <div className='m-5'>
             <PreviewPageContent patientData={patientData} onClose={onClose} />
-          </DrawerHeader>
+          </div>
         </DrawerContent>
       </Drawer>
     </div>

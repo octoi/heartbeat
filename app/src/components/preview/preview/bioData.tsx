@@ -81,7 +81,7 @@ export const BioData: React.FC<Props> = ({
         <div className='mt-3'>
           <h2 className='text-xl font-medium'>REMARKS</h2>
           <Text mt={2} fontSize='lg' className='font-medium'>
-            {bioData.diagnosis}
+            {bioData.remark.toUpperCase()}
           </Text>
         </div>
       )}

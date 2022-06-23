@@ -35,6 +35,7 @@ export interface PatientVitals {
   };
   respiratoryRate?: string;
   oxygenSaturation?: string;
+  temperature?: string;
 }
 
 export interface PatientSystemicExamination {
