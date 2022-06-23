@@ -18,14 +18,19 @@ import {
 interface Props {
   bioData: PatientBioData;
   createdAt: number;
+  tableVariant: string;
 }
 
-export const BioData: React.FC<Props> = ({ bioData, createdAt }) => {
+export const BioData: React.FC<Props> = ({
+  bioData,
+  createdAt,
+  tableVariant,
+}) => {
   return (
     <div>
       <h2 className='text-xl font-semibold mb-3'>BIODATA</h2>
       <LightMode>
-        <Table variant='striped' fontSize='lg'>
+        <Table variant={tableVariant} fontSize='lg'>
           <Thead fontSize='lg'>
             <Th>Id</Th>
             {bioData.name && <Th>Name</Th>}
@@ -52,7 +57,7 @@ export const BioData: React.FC<Props> = ({ bioData, createdAt }) => {
       </LightMode>
       {bioData.address && (
         <Text mt={3} fontSize='lg'>
-          <span className='mr-2'>ADDRESS : </span>
+          <span className='mr-2'>Address : </span>
           {bioData.address}
         </Text>
       )}
@@ -72,6 +77,14 @@ export const BioData: React.FC<Props> = ({ bioData, createdAt }) => {
             ))}
         </OrderedList>
       )}
+      {bioData.remark && (
+        <div className='mt-3'>
+          <h2 className='text-xl font-medium'>REMARKS</h2>
+          <Text mt={2} fontSize='lg' className='font-medium'>
+            {bioData.diagnosis}
+          </Text>
+        </div>
+      )}
       {bioData.diagnosis && (
         <div className='mt-3'>
           <h2 className='text-xl font-medium'>DIAGNOSIS</h2>
@@ -86,7 +99,7 @@ export const BioData: React.FC<Props> = ({ bioData, createdAt }) => {
         checkString(bioData.familyHistory) ||
         checkString(bioData.treatmentHistory)) && (
         <LightMode>
-          <Table mt={3} variant='striped'>
+          <Table mt={3} variant={tableVariant}>
             <Tbody>
               {bioData.chiefComplaint && (
                 <Tr>

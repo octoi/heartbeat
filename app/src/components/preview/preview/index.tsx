@@ -10,9 +10,14 @@ import { Footer } from './footer';
 interface Props {
   patientData: PatientData;
   printContentRef: React.MutableRefObject<any>;
+  tableVariant: string;
 }
 
-export const Preview: React.FC<Props> = ({ patientData, printContentRef }) => {
+export const Preview: React.FC<Props> = ({
+  patientData,
+  printContentRef,
+  tableVariant,
+}) => {
   return (
     <Center>
       <div className='overflow-x-scroll'>
@@ -26,9 +31,16 @@ export const Preview: React.FC<Props> = ({ patientData, printContentRef }) => {
           <BioData
             bioData={patientData.bioData || {}}
             createdAt={patientData.createdAt || 0}
+            tableVariant={tableVariant}
           />
-          <Examination examination={patientData.examination || {}} />
-          <Advice advice={patientData.advice || {}} />
+          <Examination
+            examination={patientData.examination || {}}
+            tableVariant={tableVariant}
+          />
+          <Advice
+            advice={patientData.advice || {}}
+            tableVariant={tableVariant}
+          />
 
           <div className='w-full bg-black h-0.5 opacity-20 my-5' />
           <Footer />
