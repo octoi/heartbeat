@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PatientBioData, PatientData, SetState } from '../../../utils/types';
 import {
   Checkbox,
+  Flex,
   Heading,
   Input,
   NumberDecrementStepper,
@@ -20,6 +21,12 @@ interface Props {
   loading?: boolean;
 }
 
+enum HeightUnit {
+  Metre,
+  Centimeter,
+  Inch,
+}
+
 export const BioData: React.FC<Props> = ({
   patientData,
   setPatientData,
@@ -31,6 +38,7 @@ export const BioData: React.FC<Props> = ({
   const [age, setAge] = useState(patientBioData?.age || '');
   const [sex, setSex] = useState(patientBioData?.sex || 'Male');
   const [address, setAddress] = useState(patientBioData?.address || '');
+  const [heightUnit, setHeightUnit] = useState(HeightUnit.Metre);
   const [height, setHeight] = useState(
     patientBioData?.height?.toString() || ''
   );
@@ -44,6 +52,7 @@ export const BioData: React.FC<Props> = ({
   const [allergyMedicines, setAllergyMedicines] = useState(
     patientBioData?.allergyToMedicine?.medicines || ''
   );
+  const [remark, setRemark] = useState(patientBioData?.remark || '');
   const [diagnosis, setDiagnosis] = useState(patientBioData?.diagnosis || '');
   const [chiefComplaint, setChiefComplaint] = useState(
     patientBioData?.chiefComplaint || ''
@@ -62,12 +71,20 @@ export const BioData: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    const heightNumber = Number(height);
+    let heightNumber = Number(height);
     const weightNumber = Number(weight);
+
+    if (heightUnit == HeightUnit.Centimeter) {
+      heightNumber = heightNumber * 0.01;
+    }
+
+    if (heightUnit == HeightUnit.Inch) {
+      heightNumber = heightNumber * 0.0254;
+    }
 
     const bmi = weightNumber / (heightNumber * heightNumber);
     setBmi(bmi.toFixed(2));
-  }, [height, weight]);
+  }, [height, weight, heightUnit]);
 
   useEffect(() => {
     const bioData: PatientBioData = {
@@ -82,6 +99,7 @@ export const BioData: React.FC<Props> = ({
         status: allergyToMedicines,
         medicines: allergyMedicines,
       },
+      remark,
       diagnosis,
       chiefComplaint,
       pastMedicalHistory,
@@ -106,6 +124,7 @@ export const BioData: React.FC<Props> = ({
     bmi,
     allergyToMedicines,
     allergyMedicines,
+    remark,
     diagnosis,
     chiefComplaint,
     pastMedicalHistory,
@@ -172,20 +191,34 @@ export const BioData: React.FC<Props> = ({
       <SimpleGrid mt={3} columns={{ sm: 1, md: 2, lg: 3 }} gap={2}>
         <div>
           <h2 className='mb-2 text-md'>Height (M)</h2>
-          <NumberInput
-            placeholder='Height'
-            variant='filled'
-            size='md'
-            value={height}
-            onChange={(value) => setHeight(value)}
-            isDisabled={loading}
-          >
-            <NumberInputField />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
+          <Flex alignItems='center' justifyContent='space-between'>
+            <NumberInput
+              placeholder='Height'
+              variant='filled'
+              size='md'
+              value={height}
+              onChange={(value) => setHeight(value)}
+              isDisabled={loading}
+              width='full'
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+            <Select
+              variant='filled'
+              width='28%'
+              ml={2}
+              value={heightUnit}
+              onChange={(e) => setHeightUnit(parseInt(e.target.value))}
+            >
+              <option value={HeightUnit.Metre}>M</option>
+              <option value={HeightUnit.Centimeter}>CM</option>
+              <option value={HeightUnit.Inch}>I</option>
+            </Select>
+          </Flex>
         </div>
         <div>
           <h2 className='mb-2 text-md'>Weight (Kg)</h2>
@@ -232,10 +265,20 @@ export const BioData: React.FC<Props> = ({
         )}
       </div>
       <div className='mt-3'>
+        <h2 className='mb-2 text-md'>Remarks</h2>
+        <Textarea
+          variant='filled'
+          placeholder='Remarks'
+          value={remark}
+          onChange={(e) => setRemark(e.target.value)}
+          disabled={loading}
+        />
+      </div>
+      <div className='mt-3'>
         <h2 className='mb-2 text-md'>Provisional/Find diagnosis</h2>
         <Textarea
           variant='filled'
-          placeholder='Address'
+          placeholder='Provisional/Find diagnosis'
           value={diagnosis}
           onChange={(e) => setDiagnosis(e.target.value)}
           disabled={loading}
