@@ -19,6 +19,7 @@ export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
 
   const [loading, setLoading] = useState(false);
   const [printLoading, setPrintLoading] = useState(false);
+  const [tableVariant, setTableVariant] = useState('striped');
   const [patientData, setPatientData] = useState<PatientData>({});
 
   useEffect(() => {
@@ -42,6 +43,8 @@ export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
     onBeforeGetContent() {
       setPrintLoading(true);
     },
+    pageStyle:
+      '@page { size: auto;  margin: 0mm; margin-top: 10px; margin-bottom: 50px; } @media print { body { -webkit-print-color-adjust: exact; } }',
     onAfterPrint() {
       setPrintLoading(false);
     },
@@ -60,9 +63,18 @@ export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
 
   return (
     <div>
-      <Header printContent={handlePrint} printLoading={printLoading} />
+      <Header
+        printContent={handlePrint}
+        printLoading={printLoading}
+        tableVariant={tableVariant}
+        setTableVariant={setTableVariant}
+      />
       {loading && <p>Loading ...</p>}
-      <Preview patientData={patientData} printContentRef={printContentRef} />
+      <Preview
+        patientData={patientData}
+        printContentRef={printContentRef}
+        tableVariant={tableVariant}
+      />
     </div>
   );
 };

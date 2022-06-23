@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Heading, Textarea } from '@chakra-ui/react';
+import { AdviceMedicines } from './adviceMedicines';
 import {
   PatientAdvice,
   PatientData,
   PatientMedicine,
   SetState,
 } from '../../../utils/types';
-import {
-  Heading,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Textarea,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react';
-import { AdviceMedicines } from './adviceMedicines';
 
 interface Props {
   patientData: PatientData;
@@ -33,11 +23,15 @@ export const Advice: React.FC<Props> = ({
     patientData.advice?.medicines || []
   );
   const [advice, setAdvice] = useState(patientData.advice?.advice || '');
+  const [investigationToDo, setInvestigationToDo] = useState(
+    patientData.advice?.investigationToDo || ''
+  );
 
   useEffect(() => {
     let patientAdvice: PatientAdvice = {
       medicines,
       advice,
+      investigationToDo,
     };
 
     let newPatientData: PatientData = {
@@ -46,7 +40,7 @@ export const Advice: React.FC<Props> = ({
     };
 
     setPatientData(newPatientData);
-  }, [advice, medicines]);
+  }, [advice, medicines, investigationToDo]);
 
   return (
     <div>
@@ -65,6 +59,16 @@ export const Advice: React.FC<Props> = ({
           placeholder='Advice'
           value={advice}
           onChange={(e) => setAdvice(e.target.value)}
+          disabled={loading}
+        />
+      </div>
+      <div className='mt-3'>
+        <h2 className='mb-2 text-md'>Investigation to do</h2>
+        <Textarea
+          variant='filled'
+          placeholder='Investigation to do'
+          value={investigationToDo}
+          onChange={(e) => setInvestigationToDo(e.target.value)}
           disabled={loading}
         />
       </div>

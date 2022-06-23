@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../logo.svg';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { FiSun } from 'react-icons/fi';
@@ -12,6 +12,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  Textarea,
   useColorMode,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -19,6 +20,14 @@ import {
 export const LogoDrawer: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const [doctorDetails, setDoctorDetails] = useState(
+    localStorage.getItem('doctorDetails') || ''
+  );
+
+  useEffect(() => {
+    localStorage.setItem('doctorDetails', doctorDetails);
+  }, [doctorDetails]);
 
   return (
     <>
@@ -49,6 +58,15 @@ export const LogoDrawer: React.FC = () => {
                 </>
               )}
             </Button>
+            <div className='mt-3'>
+              <h2 className='mb-2 text-md font-medium'>Doctor Details</h2>
+              <Textarea
+                variant='filled'
+                placeholder='Doctor details'
+                value={doctorDetails}
+                onChange={(e) => setDoctorDetails(e.target.value)}
+              />
+            </div>
           </DrawerBody>
 
           <DrawerFooter>

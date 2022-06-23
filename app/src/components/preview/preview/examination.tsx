@@ -4,9 +4,10 @@ import { LightMode, Table, Tbody, Td, Tr } from '@chakra-ui/react';
 
 interface Props {
   examination: PatientExamination;
+  tableVariant: string;
 }
 
-export const Examination: React.FC<Props> = ({ examination }) => {
+export const Examination: React.FC<Props> = ({ examination, tableVariant }) => {
   const check =
     examination.generalExamination ||
     (examination.vitals &&
@@ -31,7 +32,7 @@ export const Examination: React.FC<Props> = ({ examination }) => {
         {(examination.generalExamination ||
           examination.vitals ||
           examination.systemicExamination) && (
-          <Table variant='striped'>
+          <Table variant={tableVariant}>
             <Tbody>
               {examination.generalExamination && (
                 <Tr>

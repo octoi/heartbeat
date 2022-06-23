@@ -13,11 +13,14 @@ import {
 
 interface Props {
   advice: PatientAdvice;
+  tableVariant: string;
 }
 
-export const Advice: React.FC<Props> = ({ advice }) => {
+export const Advice: React.FC<Props> = ({ advice, tableVariant }) => {
   const check =
-    advice.advice || (advice.medicines && advice.medicines.length !== 0);
+    advice.advice ||
+    (advice.medicines && advice.medicines.length !== 0) ||
+    advice.investigationToDo;
 
   if (!check) return null;
 
@@ -31,7 +34,7 @@ export const Advice: React.FC<Props> = ({ advice }) => {
       )}
       {advice.medicines && advice.medicines.length !== 0 && (
         <LightMode>
-          <Table mt={2} variant='striped'>
+          <Table mt={2} variant={tableVariant}>
             <Thead>
               <Th>Index</Th>
               <Th>Medicine</Th>
@@ -52,6 +55,14 @@ export const Advice: React.FC<Props> = ({ advice }) => {
             </Tbody>
           </Table>
         </LightMode>
+      )}
+      {advice.investigationToDo && (
+        <div className='mt-3'>
+          <h2 className='text-xl font-medium'>INVESTIGATION TO DO</h2>
+          <Text mt={2} fontSize='lg'>
+            {advice.investigationToDo}
+          </Text>
+        </div>
       )}
     </div>
   );

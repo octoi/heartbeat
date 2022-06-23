@@ -18,6 +18,7 @@ export interface PatientBioData {
     status?: boolean;
     medicines?: string;
   };
+  remark?: string;
   diagnosis?: string;
   chiefComplaint?: string;
   pastMedicalHistory?: string;
@@ -61,6 +62,7 @@ export interface PatientMedicine {
 export interface PatientAdvice {
   medicines?: PatientMedicine[];
   advice?: string;
+  investigationToDo?: string;
 }
 
 export interface PatientData {
