@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Heading, Textarea } from '@chakra-ui/react';
+import { AdviceMedicines } from './adviceMedicines';
 import {
   PatientAdvice,
   PatientData,
   PatientMedicine,
   SetState,
 } from '../../../utils/types';
-import {
-  Heading,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Textarea,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react';
-import { AdviceMedicines } from './adviceMedicines';
 
 interface Props {
   patientData: PatientData;
