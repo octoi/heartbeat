@@ -1,7 +1,7 @@
 import React from 'react';
-import moment from 'moment';
 import { PatientBioData } from '../../../utils/types';
 import { checkString } from '../../../utils/checkString';
+import { getId } from '../../../utils/getId';
 import {
   LightMode,
   ListItem,
@@ -36,7 +36,7 @@ export const BioData: React.FC<Props> = ({ bioData, createdAt }) => {
           </Thead>
           <Tbody>
             <Tr>
-              <Td>{moment(createdAt).format('lll')}</Td>
+              <Td>{getId(createdAt)}</Td>
               {bioData.name && <Td>{bioData.name}</Td>}
               {bioData.age && (
                 <Td>

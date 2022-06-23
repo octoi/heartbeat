@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
-import { Patient } from '../../utils/types';
+import { Patient, PatientData } from '../../utils/types';
 import { Header } from './header';
 import { Patients } from './patients';
 import { useToast } from '@chakra-ui/react';
+import { getId } from '../../utils/getId';
 
 export const HomePageContent: React.FC = () => {
   const toast = useToast();
@@ -39,9 +40,16 @@ export const HomePageContent: React.FC = () => {
       <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Patients
         loading={loading}
-        patients={patients.filter((patient) =>
-          patient.data.toLowerCase().includes(searchQuery)
-        )}
+        patients={patients.filter((patient) => {
+          // patient.data.toLowerCase().includes(searchQuery)
+          const patientData: PatientData = JSON.parse(patient.data);
+          return (
+            patientData.bioData?.name
+              ?.toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            getId(patientData.createdAt || 0) === searchQuery.trim()
+          );
+        })}
       />
     </section>
   );
