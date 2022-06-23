@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button, SimpleGrid, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { PatientData } from '../../../utils/types';
 import { BioData } from './bioData';
@@ -7,6 +6,17 @@ import { ExaminationForm } from './examination';
 import { createPatient, updatePatient } from './helper';
 import { DeleteButton } from './DeleteButton';
 import { Advice } from './advice';
+import { PreviewPageContent } from '../../preview';
+import {
+  Button,
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  SimpleGrid,
+  useDisclosure,
+  useToast,
+} from '@chakra-ui/react';
 
 interface Props {
   patientId?: number;
@@ -22,6 +32,9 @@ export const EditForm: React.FC<Props> = ({ patientId, patientOldData }) => {
   );
   const [loading, setLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef<any>();
 
   const saveToDatabase = () => {
     if (patientData?.bioData?.name?.trim().length === 0) {
@@ -79,6 +92,8 @@ export const EditForm: React.FC<Props> = ({ patientId, patientOldData }) => {
           Save To Database
         </Button>
         <Button
+          ref={btnRef}
+          onClick={onOpen}
           colorScheme='teal'
           size='md'
           disabled={loading || deleteLoading}
@@ -95,6 +110,21 @@ export const EditForm: React.FC<Props> = ({ patientId, patientOldData }) => {
           />
         )}
       </SimpleGrid>
+
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+        size='full'
+      >
+        <DrawerOverlay />
+        <DrawerContent overflowY='scroll'>
+          <DrawerHeader>
+            <PreviewPageContent patientData={patientData} onClose={onClose} />
+          </DrawerHeader>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 };

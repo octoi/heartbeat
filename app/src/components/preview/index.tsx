@@ -6,12 +6,19 @@ import { getPatient } from '../edit/helper';
 import { Header } from './header';
 import { Preview } from './preview';
 import { useReactToPrint } from 'react-to-print';
+import { getId } from '../../utils/getId';
 
 interface Props {
-  patientId: number;
+  patientId?: number;
+  patientData?: PatientData;
+  onClose?: any;
 }
 
-export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
+export const PreviewPageContent: React.FC<Props> = ({
+  patientId,
+  patientData: passedPatientData,
+  onClose,
+}) => {
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -20,9 +27,14 @@ export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
   const [loading, setLoading] = useState(false);
   const [printLoading, setPrintLoading] = useState(false);
   const [tableVariant, setTableVariant] = useState('striped');
-  const [patientData, setPatientData] = useState<PatientData>({});
+  const [patientData, setPatientData] = useState<PatientData>(
+    passedPatientData || {}
+  );
 
   useEffect(() => {
+    if (patientData && !patientId) return;
+    if (!patientId) return; // This wont trigger, just for typescript
+
     setLoading(true);
 
     getPatient(patientId, toast)
@@ -39,7 +51,10 @@ export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
 
   const handlePrint = useReactToPrint({
     content: () => printContentRef.current,
-    documentTitle: patientData.bioData?.name || 'patient_details',
+    documentTitle:
+      `${getId(patientData.createdAt || Date.now())}_${
+        patientData.bioData?.name
+      }` || 'patient_details',
     onBeforeGetContent() {
       setPrintLoading(true);
     },
@@ -68,6 +83,7 @@ export const PreviewPageContent: React.FC<Props> = ({ patientId }) => {
         printLoading={printLoading}
         tableVariant={tableVariant}
         setTableVariant={setTableVariant}
+        onClose={onClose}
       />
       {loading && <p>Loading ...</p>}
       <Preview
