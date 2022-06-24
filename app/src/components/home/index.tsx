@@ -17,8 +17,13 @@ export const HomePageContent: React.FC = () => {
     setLoading(true);
 
     invoke('read_patients')
-      .then((data: any) => {
-        setPatients(data.reverse());
+      .then((rawData: any) => {
+        var data: Patient[] = rawData;
+        setPatients(
+          data.sort(function (a, b) {
+            return JSON.parse(b.data).updatedAt - JSON.parse(a.data).updatedAt;
+          })
+        );
       })
       .catch((err) => {
         toast({
@@ -41,7 +46,6 @@ export const HomePageContent: React.FC = () => {
       <Patients
         loading={loading}
         patients={patients.filter((patient) => {
-          // patient.data.toLowerCase().includes(searchQuery)
           const patientData: PatientData = JSON.parse(patient.data);
           return (
             patientData.bioData?.name
