@@ -34,6 +34,7 @@ export const Patients: React.FC<Props> = ({ patients, loading }) => {
                 <Th>Index</Th>
                 <Th>Avatar</Th>
                 <Th>Name</Th>
+                <Th>Created at</Th>
                 <Th>Last updated</Th>
                 <Th>Edit</Th>
                 <Th>View</Th>
@@ -52,6 +53,11 @@ export const Patients: React.FC<Props> = ({ patients, loading }) => {
                       />
                     </Td>
                     <Td>{patientData?.bioData?.name}</Td>
+                    <Td>
+                      {moment(patientData?.createdAt).format(
+                        'DD/MM/yy hh:mm A'
+                      )}
+                    </Td>
                     <Td>{moment(patientData?.updatedAt).fromNow()}</Td>
                     <Td>
                       <Link to={`/edit/${patient.id}`}>
