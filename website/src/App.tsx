@@ -1,6 +1,11 @@
-import React from "react";
-import { ChakraWrap } from "./components/chakraWrap";
+import React from 'react';
+import { Container } from '@chakra-ui/react';
+import { Header } from './components/header';
 
 export const App: React.FC = () => {
-  return <ChakraWrap></ChakraWrap>;
+  return (
+    <Container maxW='container.xl'>
+      <Header />
+    </Container>
+  );
 };
