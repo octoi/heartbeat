@@ -14,9 +14,9 @@ export const Landing: React.FC = () => {
   const { colorMode } = useColorMode();
 
   return (
-    <div className='my-10'>
+    <div className='mb-10 mt-5'>
       <Center>
-        <Heading mt={16} size='4xl'>
+        <Heading mt={10} size='4xl'>
           Building Productive Doctors
         </Heading>
       </Center>

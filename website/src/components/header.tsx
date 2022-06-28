@@ -2,7 +2,14 @@ import React from 'react';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { FiSun } from 'react-icons/fi';
 import { FaGithub } from 'react-icons/fa';
-import { Flex, Heading, IconButton, useColorMode } from '@chakra-ui/react';
+import {
+  Flex,
+  Heading,
+  IconButton,
+  Tag,
+  TagLabel,
+  useColorMode,
+} from '@chakra-ui/react';
 
 export const Header: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -19,6 +26,9 @@ export const Header: React.FC = () => {
           Heart
           <span className='text-teal-400'>Beat</span>
         </h2>
+        <Tag ml={2} borderRadius='full'>
+          <TagLabel>0.1.0</TagLabel>
+        </Tag>
       </Flex>
       <Flex alignItems='center'>
         <a href='https://github.com/octoi/heartbeat'>
