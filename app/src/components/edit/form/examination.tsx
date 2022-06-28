@@ -62,6 +62,7 @@ export const ExaminationForm: React.FC<Props> = ({
   const [ddsIfAny, setDdsIfAny] = useState(
     patientSystemicExamination?.ddsIfAny || ''
   );
+   const [diagnosis, setDiagnosis] = useState(patientSystemicExamination?.diagnosis || '');
 
   useEffect(() => {
     const examination: PatientExamination = {
@@ -83,6 +84,7 @@ export const ExaminationForm: React.FC<Props> = ({
         cns,
         musculoskeletal,
         ddsIfAny,
+        diagnosis,
       },
     };
 
@@ -106,6 +108,7 @@ export const ExaminationForm: React.FC<Props> = ({
     cns,
     musculoskeletal,
     ddsIfAny,
+    diagnosis,
   ]);
 
   return (
@@ -281,6 +284,16 @@ export const ExaminationForm: React.FC<Props> = ({
           />
         </div>
       </SimpleGrid>
+       <div className='mt-3'>
+        <h2 className='mb-2 text-md'>Provisional/Find diagnosis</h2>
+        <Textarea
+          variant='filled'
+          placeholder='Provisional/Find diagnosis'
+          value={diagnosis}
+          onChange={(e) => setDiagnosis(e.target.value)}
+          disabled={loading}
+        />
+      </div>
     </div>
   );
 };

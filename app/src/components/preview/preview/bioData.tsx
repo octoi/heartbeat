@@ -1,7 +1,7 @@
-import React from 'react';
-import { PatientBioData } from '../../../utils/types';
-import { checkString } from '../../../utils/checkString';
-import { getId } from '../../../utils/getId';
+import React from "react";
+import { PatientBioData } from "../../../utils/types";
+import { checkString } from "../../../utils/checkString";
+import { getId } from "../../../utils/getId";
 import {
   LightMode,
   ListItem,
@@ -13,10 +13,11 @@ import {
   Th,
   Thead,
   Tr,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 interface Props {
   bioData: PatientBioData;
+  diagnosis: string;
   createdAt: number;
   tableVariant: string;
 }
@@ -25,13 +26,14 @@ export const BioData: React.FC<Props> = ({
   bioData,
   createdAt,
   tableVariant,
+  diagnosis,
 }) => {
   return (
     <div>
-      <h2 className='text-xl font-semibold mb-3'>BIODATA</h2>
+      <h2 className="text-xl font-semibold mb-3">BIODATA</h2>
       <LightMode>
-        <Table variant={tableVariant} fontSize='lg'>
-          <Thead fontSize='lg'>
+        <Table variant={tableVariant} fontSize="lg">
+          <Thead fontSize="lg">
             <Th>Id</Th>
             {bioData.name && <Th>Name</Th>}
             {bioData.age && <Th>Age</Th>}
@@ -45,7 +47,7 @@ export const BioData: React.FC<Props> = ({
               {bioData.name && <Td>{bioData.name}</Td>}
               {bioData.age && (
                 <Td>
-                  {bioData.age} {bioData.sex && ' / ' + bioData.sex[0]}
+                  {bioData.age} {bioData.sex && " / " + bioData.sex[0]}
                 </Td>
               )}
               {bioData.height && (
@@ -61,40 +63,40 @@ export const BioData: React.FC<Props> = ({
         </Table>
       </LightMode>
       {bioData.address && (
-        <Text mt={3} fontSize='lg'>
-          <span className='mr-2'>Address : </span>
+        <Text mt={3} fontSize="lg">
+          <span className="mr-2">Address : </span>
           {bioData.address}
         </Text>
       )}
       {bioData.allergyToMedicine?.status && (
-        <Text mt={3} color='red' className='text-lg font-medium'>
+        <Text mt={3} color="red" className="text-lg font-medium">
           Allergic to medicines
         </Text>
       )}
       {bioData.allergyToMedicine?.medicines && (
         <OrderedList mt={2} ml={5}>
           {bioData.allergyToMedicine?.medicines
-            .split('\n')
+            .split("\n")
             .map((medicineName, idx) => (
-              <ListItem key={idx} fontSize='lg'>
+              <ListItem key={idx} fontSize="lg">
                 {medicineName}
               </ListItem>
             ))}
         </OrderedList>
       )}
       {bioData.remark && (
-        <div className='mt-3'>
-          <h2 className='text-xl font-medium'>REMARKS</h2>
-          <Text mt={2} fontSize='lg' className='font-medium'>
+        <div className="mt-3">
+          <h2 className="text-xl font-medium">REMARKS</h2>
+          <Text mt={2} fontSize="lg" className="font-medium">
             {bioData.remark.toUpperCase()}
           </Text>
         </div>
       )}
-      {bioData.diagnosis && (
-        <div className='mt-3'>
-          <h2 className='text-xl font-medium'>DIAGNOSIS</h2>
-          <Text mt={2} fontSize='lg'>
-            {bioData.diagnosis}
+      {diagnosis && (
+        <div className="mt-3">
+          <h2 className="text-xl font-medium">DIAGNOSIS</h2>
+          <Text mt={2} fontSize="lg">
+            {diagnosis}
           </Text>
         </div>
       )}
@@ -108,31 +110,31 @@ export const BioData: React.FC<Props> = ({
             <Tbody>
               {bioData.chiefComplaint && (
                 <Tr>
-                  <Td fontWeight='medium'>CHIEF COMPLAINT</Td>
+                  <Td fontWeight="medium">CHIEF COMPLAINT</Td>
                   <Td>{bioData.chiefComplaint}</Td>
                 </Tr>
               )}
               {bioData.pastMedicalHistory && (
                 <Tr>
-                  <Td fontWeight='medium'>PAST MEDICAL HISTORY</Td>
+                  <Td fontWeight="medium">PAST MEDICAL HISTORY</Td>
                   <Td>{bioData.pastMedicalHistory}</Td>
                 </Tr>
               )}
               {bioData.personalHistory && (
                 <Tr>
-                  <Td fontWeight='medium'>PERSONAl HISTORY</Td>
+                  <Td fontWeight="medium">PERSONAl HISTORY</Td>
                   <Td>{bioData.personalHistory}</Td>
                 </Tr>
               )}
               {bioData.familyHistory && (
                 <Tr>
-                  <Td fontWeight='medium'>FAMILY HISTORY</Td>
+                  <Td fontWeight="medium">FAMILY HISTORY</Td>
                   <Td>{bioData.familyHistory}</Td>
                 </Tr>
               )}
               {bioData.treatmentHistory && (
                 <Tr>
-                  <Td fontWeight='medium'>TREATMENT HISTORY</Td>
+                  <Td fontWeight="medium">TREATMENT HISTORY</Td>
                   <Td>{bioData.treatmentHistory}</Td>
                 </Tr>
               )}
