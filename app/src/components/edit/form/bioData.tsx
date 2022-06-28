@@ -53,7 +53,6 @@ export const BioData: React.FC<Props> = ({
     patientBioData?.allergyToMedicine?.medicines || ''
   );
   const [remark, setRemark] = useState(patientBioData?.remark || '');
-  const [diagnosis, setDiagnosis] = useState(patientBioData?.diagnosis || '');
   const [chiefComplaint, setChiefComplaint] = useState(
     patientBioData?.chiefComplaint || ''
   );
@@ -102,7 +101,6 @@ export const BioData: React.FC<Props> = ({
         medicines: allergyMedicines,
       },
       remark,
-      diagnosis,
       chiefComplaint,
       pastMedicalHistory,
       personalHistory,
@@ -128,7 +126,6 @@ export const BioData: React.FC<Props> = ({
     allergyToMedicines,
     allergyMedicines,
     remark,
-    diagnosis,
     chiefComplaint,
     pastMedicalHistory,
     personalHistory,
@@ -280,16 +277,6 @@ export const BioData: React.FC<Props> = ({
           placeholder='Remarks'
           value={remark}
           onChange={(e) => setRemark(e.target.value)}
-          disabled={loading}
-        />
-      </div>
-      <div className='mt-3'>
-        <h2 className='mb-2 text-md'>Provisional/Find diagnosis</h2>
-        <Textarea
-          variant='filled'
-          placeholder='Provisional/Find diagnosis'
-          value={diagnosis}
-          onChange={(e) => setDiagnosis(e.target.value)}
           disabled={loading}
         />
       </div>

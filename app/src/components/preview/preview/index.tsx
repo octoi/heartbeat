@@ -1,11 +1,11 @@
-import React from 'react';
-import { PatientData } from '../../../utils/types';
-import { Center } from '@chakra-ui/react';
-import { WaterMark } from './waterMark';
-import { BioData } from './bioData';
-import { Examination } from './examination';
-import { Advice } from './advice';
-import { Footer } from './footer';
+import React from "react";
+import { PatientData } from "../../../utils/types";
+import { Center } from "@chakra-ui/react";
+import { WaterMark } from "./waterMark";
+import { BioData } from "./bioData";
+import { Examination } from "./examination";
+import { Advice } from "./advice";
+import { Footer } from "./footer";
 
 interface Props {
   patientData: PatientData;
@@ -20,18 +20,21 @@ export const Preview: React.FC<Props> = ({
 }) => {
   return (
     <Center>
-      <div className='overflow-x-scroll'>
+      <div className="overflow-x-scroll">
         <div
-          className='min-w-[1000px] max-w-[1000px] mt-10 bg-white text-black px-10 py-3'
+          className="min-w-[1000px] max-w-[1000px] mt-10 bg-white text-black px-10 py-3"
           ref={printContentRef}
         >
           <WaterMark />
-          <div className='w-full bg-black h-0.5 opacity-20 my-5' />
+          <div className="w-full bg-black h-0.5 opacity-20 my-5" />
 
           <BioData
             bioData={patientData.bioData || {}}
             createdAt={patientData.createdAt || Date.now()}
             tableVariant={tableVariant}
+            diagnosis={
+              patientData.examination?.systemicExamination?.diagnosis || ""
+            }
           />
           <Examination
             examination={patientData.examination || {}}
@@ -42,7 +45,7 @@ export const Preview: React.FC<Props> = ({
             tableVariant={tableVariant}
           />
 
-          <div className='w-full bg-black h-0.5 opacity-20 my-5' />
+          <div className="w-full bg-black h-0.5 opacity-20 my-5" />
           <Footer />
         </div>
       </div>
