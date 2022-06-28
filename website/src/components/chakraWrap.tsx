@@ -1,16 +1,16 @@
-import React from "react";
-import { PropsWithChildren } from "react";
+import React from 'react';
+import { PropsWithChildren } from 'react';
 import {
   ChakraProvider,
   ColorModeScript,
   extendTheme,
   ThemeConfig,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 type ReactComponent<Props = {}> = React.FC<PropsWithChildren<Props>>;
 
 const config: ThemeConfig = {
-  useSystemColorMode: true,
+  initialColorMode: 'dark',
 };
 
 const theme = extendTheme({ config });
