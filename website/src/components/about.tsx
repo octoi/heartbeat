@@ -1,12 +1,15 @@
 import React from 'react';
 import { MdCheckCircle } from 'react-icons/md';
+import { FaWindows } from 'react-icons/fa';
 import {
+  Button,
+  Center,
+  DarkMode,
   Flex,
   Heading,
   Link,
   List,
   ListIcon,
-  ListItem,
   Text,
 } from '@chakra-ui/react';
 
@@ -34,6 +37,17 @@ export const About: React.FC = () => {
         <CustomListItem title='Print patient data from app' />
         <CustomListItem title='Dark / Light mode' />
       </List>
+      <DarkMode>
+        <a
+          download
+          href='https://github.com/octoi/heartbeat/releases/download/0.1.0/heartbeat_0.1.0_x64_en-US.msi'
+        >
+          <Button mt={10} size='lg' colorScheme='teal'>
+            <FaWindows className='mr-2' />
+            Download for windows
+          </Button>
+        </a>
+      </DarkMode>
     </div>
   );
 };
