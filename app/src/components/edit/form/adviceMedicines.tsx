@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PatientMedicine, SetState } from '../../../utils/types';
 import { FaRegTrashAlt, FaPlus } from 'react-icons/fa';
 import {
+  Flex,
   IconButton,
   Input,
   Select,
@@ -27,23 +28,31 @@ export const AdviceMedicines: React.FC<Props> = ({
 }) => {
   const [medicineName, setMedicineName] = useState('');
   const [frequency, setFrequency] = useState('');
-  const [time, setTime] = useState('Before food');
+  const [time, setTime] = useState('After food');
   const [duration, setDuration] = useState('');
+  const [durationType, setDurationType] = useState('Day');
 
-  const addMedicine = () => {
+  const addMedicine = (e: any) => {
+    e.preventDefault();
+
+    let medicine_duration = `${duration} ${durationType}${
+      Number(duration) != 1 ? 's' : ''
+    }`;
+
     setMedicines([
       ...medicines,
       {
         medicineName,
         frequency,
         time,
-        duration,
+        duration: medicine_duration,
       },
     ]);
     setMedicineName('');
     setFrequency('');
     setTime('Before food');
     setDuration('');
+    setDurationType('Day');
   };
 
   const deleteMedicine = (idx: number) => {
@@ -96,6 +105,7 @@ export const AdviceMedicines: React.FC<Props> = ({
                   value={medicineName}
                   onChange={(e) => setMedicineName(e.target.value)}
                   disabled={loading}
+                  required
                 />
               </Td>
               <Td>
@@ -106,6 +116,7 @@ export const AdviceMedicines: React.FC<Props> = ({
                   value={frequency}
                   onChange={(e) => setFrequency(e.target.value)}
                   disabled={loading}
+                  required
                 />
               </Td>
               <Td>
@@ -120,14 +131,28 @@ export const AdviceMedicines: React.FC<Props> = ({
                 </Select>
               </Td>
               <Td>
-                <Input
-                  placeholder='Duration'
-                  variant='filled'
-                  size='md'
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                  disabled={loading}
-                />
+                <Flex alignItems='center' justifyContent='space-around'>
+                  <Input
+                    placeholder='Duration'
+                    variant='filled'
+                    size='md'
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value)}
+                    disabled={loading}
+                    required
+                  />
+                  <Select
+                    variant='filled'
+                    value={durationType}
+                    onChange={(e) => setDurationType(e.target.value)}
+                    ml={2}
+                    width='38%'
+                  >
+                    <option value='Day'>D</option>
+                    <option value='Week'>W</option>
+                    <option value='Month'>M</option>
+                  </Select>
+                </Flex>
               </Td>
               <Td>
                 <IconButton
