@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { PatientData, SetState } from '../../utils/types';
 import { TextInput } from '../common/TextInput';
 import {
@@ -32,7 +31,6 @@ export const EditBioData: React.FC<Props> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toast = useToast();
-  const navigate = useNavigate();
 
   const patientBioData = patientData.bioData;
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { PatientData, SetState } from '../../utils/types';
 import { EditBioData } from './EditBioData';
 import { Avatar, Center, Flex, Text, useColorMode } from '@chakra-ui/react';
+import { DeletetBioData } from './DeletetBioData';
 
 interface Props {
   patientId: number;
@@ -22,7 +23,7 @@ export const BioData: React.FC<Props> = ({
     <Flex
       direction='column'
       px={2}
-      w='72'
+      w='80'
       bg={colorMode == 'dark' ? 'gray.700' : 'gray.50'}
       height='fit-content'
       className='rounded p-5'
@@ -44,6 +45,7 @@ export const BioData: React.FC<Props> = ({
         patientData={patientData}
         setPatientData={setPatientData}
       />
+      <DeletetBioData patientId={patientId} patientName={bioData?.name} />
     </Flex>
   );
 };
