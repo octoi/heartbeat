@@ -1,5 +1,5 @@
-import React from "react";
-import { PropsWithChildren } from "react";
+import React from 'react';
+import { PropsWithChildren } from 'react';
 
 export type ReactComponent<Props = {}> = React.FC<PropsWithChildren<Props>>;
 
@@ -11,8 +11,11 @@ export interface PatientBioData {
   age?: string;
   sex?: string;
   address?: string;
-  heightUnit?: string;
+}
+
+export interface PatientMedicalBioData {
   height?: string;
+  heightUnit?: string;
   weight?: string;
   bmi?: string;
   allergyToMedicine?: {
@@ -20,7 +23,6 @@ export interface PatientBioData {
     medicines?: string;
   };
   remark?: string;
-
   chiefComplaint?: string;
   pastMedicalHistory?: string;
   personalHistory?: string;
@@ -46,7 +48,7 @@ export interface PatientSystemicExamination {
   cns?: string;
   musculoskeletal?: string;
   ddsIfAny?: string;
-  diagnosis?: string;
+  diagnosis?: string[];
 }
 
 export interface PatientExamination {
@@ -68,12 +70,17 @@ export interface PatientAdvice {
   investigationToDo?: string;
 }
 
-export interface PatientData {
-  bioData?: PatientBioData;
+export interface PatientRecord {
+  medicalBioData?: PatientMedicalBioData;
   examination?: PatientExamination;
   advice?: PatientAdvice;
   createdAt?: number;
-  updatedAt?: number;
+}
+
+export interface PatientData {
+  bioData?: PatientBioData;
+  records?: PatientRecord[];
+  createdAt?: number;
 }
 
 export interface Patient {
