@@ -4,6 +4,7 @@ import { IoMdPersonAdd } from 'react-icons/io';
 import { LogoDrawer } from '../logoDrawer';
 import { Link } from 'react-router-dom';
 import { SetState } from '../../utils/types';
+import { Paths } from '../../utils/paths';
 
 interface Props {
   searchQuery: string;
@@ -24,7 +25,7 @@ export const Header: React.FC<Props> = ({ searchQuery, setSearchQuery }) => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
 
-      <Link to='/edit'>
+      <Link to={Paths.NewPatient.toString()}>
         <Button size='md' colorScheme='teal'>
           <IoMdPersonAdd className='mr-2' />
           New patient
