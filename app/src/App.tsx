@@ -4,6 +4,7 @@ import { TauriConfirm } from './components/tauriConfirm';
 import { Paths } from './utils/paths';
 import HomePage from './pages';
 import NewPatient from './pages/newPatient';
+import PatientPage from './pages/patient';
 
 export default function App() {
   return (
@@ -13,10 +14,8 @@ export default function App() {
           <Router>
             <Routes>
               <Route path='/' element={<HomePage />} />
-              <Route
-                path={Paths.NewPatient.toString()}
-                element={<NewPatient />}
-              />
+              <Route path={Paths.NewPatient} element={<NewPatient />} />
+              <Route path={Paths.Patient + '/:id'} element={<PatientPage />} />
             </Routes>
           </Router>
         </TauriConfirm>

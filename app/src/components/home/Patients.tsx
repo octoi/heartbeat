@@ -1,7 +1,9 @@
 import React from 'react';
 import moment from 'moment';
-import { Patient, PatientData } from '../../utils/types';
+import { Link } from 'react-router-dom';
 import { TiFolderOpen } from 'react-icons/ti';
+import { Patient, PatientData } from '../../utils/types';
+import { Paths } from '../../utils/paths';
 import {
   Avatar,
   IconButton,
@@ -65,12 +67,14 @@ export const Patients: React.FC<Props> = ({ patients, loading }) => {
                       ).fromNow()}
                     </Td>
                     <Td>
-                      <IconButton
-                        aria-label='View patient'
-                        variant='ghost'
-                        colorScheme='teal'
-                        icon={<TiFolderOpen className='text-xl' />}
-                      />
+                      <Link to={`${Paths.Patient}/${patient.id}`}>
+                        <IconButton
+                          aria-label='View patient'
+                          variant='ghost'
+                          colorScheme='teal'
+                          icon={<TiFolderOpen className='text-xl' />}
+                        />
+                      </Link>
                     </Td>
                   </Tr>
                 );

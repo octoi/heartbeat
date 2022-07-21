@@ -25,7 +25,7 @@ export const Header: React.FC<Props> = ({ searchQuery, setSearchQuery }) => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
 
-      <Link to={Paths.NewPatient.toString()}>
+      <Link to={Paths.NewPatient}>
         <Button size='md' colorScheme='teal'>
           <IoMdPersonAdd className='mr-2' />
           New patient
