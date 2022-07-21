@@ -13,10 +13,10 @@ export const PatientBioDataForm: React.FC<Props> = ({ patientBioData }) => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const [name, setName] = useState(patientBioData?.name || '');
-  const [age, setAge] = useState(patientBioData?.age || '');
-  const [sex, setSex] = useState(patientBioData?.sex || 'Male');
-  const [address, setAddres] = useState(patientBioData?.address || '');
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [sex, setSex] = useState('Male');
+  const [address, setAddres] = useState('');
   const [loading, setLoading] = useState(false);
 
   const createPatient = () => {
