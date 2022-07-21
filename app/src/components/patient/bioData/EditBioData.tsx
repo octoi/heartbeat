@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { PatientData, SetState } from '../../utils/types';
-import { TextInput } from '../common/TextInput';
+import { PatientData, SetState } from '../../../utils/types';
+import { TextInput } from '../../common/TextInput';
 import {
   useDisclosure,
   Modal,

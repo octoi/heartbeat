@@ -4,7 +4,7 @@ import { invoke } from '@tauri-apps/api/tauri';
 import { useNavigate } from 'react-router-dom';
 import { PatientData } from '../../utils/types';
 import { Header } from '../newPatient/Header';
-import { BioData } from './BioData';
+import { BioData } from './bioData';
 
 interface Props {
   patientId: number;

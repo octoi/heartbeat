@@ -1,5 +1,5 @@
 import React from 'react';
-import { PatientData, SetState } from '../../utils/types';
+import { PatientData, SetState } from '../../../utils/types';
 import { EditBioData } from './EditBioData';
 import { Avatar, Center, Flex, Text, useColorMode } from '@chakra-ui/react';
 import { DeletetBioData } from './DeletetBioData';

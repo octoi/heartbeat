@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { invoke } from '@tauri-apps/api';
 import {
   useDisclosure,
   Button,
@@ -11,7 +12,6 @@ import {
   AlertDialogOverlay,
   useToast,
 } from '@chakra-ui/react';
-import { invoke } from '@tauri-apps/api';
 
 interface Props {
   patientId: number;
