@@ -29,7 +29,6 @@ export const PatientBioDataForm: React.FC<Props> = ({ patientBioData }) => {
         sex,
         address,
       },
-      records: [],
       createdAt: Date.now(),
     };
 
