@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { PatientData } from '../../utils/types';
 import { Header } from '../newPatient/Header';
 import { BioData } from './bioData';
+import { PatientRecords } from './records';
 
 interface Props {
   patientId: number;
@@ -55,7 +56,13 @@ export const PatientContent: React.FC<Props> = ({ patientId }) => {
             setPatientData={setPatientData}
           />
         )}
-        <div className='bg-gray-700 h-screen w-full'></div>
+        {!loading && (
+          <PatientRecords
+            patientId={patientId}
+            patientData={patientData}
+            setPatientData={setPatientData}
+          />
+        )}
       </Flex>
     </div>
   );
