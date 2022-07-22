@@ -59,13 +59,7 @@ export const Patients: React.FC<Props> = ({ patients, loading }) => {
                         'DD/MM/yy hh:mm A'
                       )}
                     </Td>
-                    <Td>
-                      {moment(
-                        patientData.records != undefined
-                          ? patientData.records[0].createdAt
-                          : patientData.createdAt
-                      ).fromNow()}
-                    </Td>
+                    <Td>{moment(patientData.updatedAt).fromNow()}</Td>
                     <Td>
                       <Link to={`${Paths.Patient}/${patient.id}`}>
                         <IconButton
