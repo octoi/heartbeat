@@ -9,6 +9,7 @@ interface Props {
   className?: string;
   disabled?: boolean;
   textArea?: boolean;
+  disableTitle?: boolean;
 }
 
 export const TextInput: React.FC<Props> = ({
@@ -18,10 +19,11 @@ export const TextInput: React.FC<Props> = ({
   className,
   disabled,
   textArea,
+  disableTitle,
 }) => {
   return (
     <div className={className}>
-      <h2 className='mb-2 text-md'>{title}</h2>
+      {!disableTitle && <h2 className='mb-2 text-md'>{title}</h2>}
       {textArea ? (
         <Textarea
           variant='filled'
