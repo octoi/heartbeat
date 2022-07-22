@@ -31,14 +31,28 @@ export const MedicalBioData: React.FC<Props> = ({
   const [height, setHeight] = useState(medicalBioData?.height || '');
   const [weight, setWeight] = useState(medicalBioData?.weight || '');
   const [bmi, setBmi] = useState(medicalBioData?.bmi || '0');
-  const [allergyToMedicines, setAllergyToMedicines] = useState(false);
-  const [allergyMedicines, setAllergyMedicines] = useState('');
-  const [remark, setRemark] = useState('');
-  const [chiefComplaint, setChiefComplaint] = useState('');
-  const [pastMedicalHistory, setPastMedicalHistory] = useState('');
-  const [personalHistory, setPersonalHistory] = useState('');
-  const [familyHistory, setFamilyHistory] = useState('');
-  const [treatmentHistory, setTreatmentHistory] = useState('');
+  const [allergyToMedicines, setAllergyToMedicines] = useState(
+    medicalBioData?.allergyToMedicine?.status || false
+  );
+  const [allergyMedicines, setAllergyMedicines] = useState(
+    medicalBioData?.allergyToMedicine?.medicines || ''
+  );
+  const [remark, setRemark] = useState(medicalBioData?.remark || '');
+  const [chiefComplaint, setChiefComplaint] = useState(
+    medicalBioData?.chiefComplaint || ''
+  );
+  const [pastMedicalHistory, setPastMedicalHistory] = useState(
+    medicalBioData?.pastMedicalHistory || ''
+  );
+  const [personalHistory, setPersonalHistory] = useState(
+    medicalBioData?.personalHistory || ''
+  );
+  const [familyHistory, setFamilyHistory] = useState(
+    medicalBioData?.familyHistory || ''
+  );
+  const [treatmentHistory, setTreatmentHistory] = useState(
+    medicalBioData?.treatmentHistory || ''
+  );
 
   useEffect(() => {
     let heightNumber = Number(height);

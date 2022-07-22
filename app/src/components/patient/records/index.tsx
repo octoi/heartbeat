@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
-import { Flex } from '@chakra-ui/react';
-import { PatientData, PatientRecord, SetState } from '../../../utils/types';
+import moment from 'moment';
+import { PatientData, SetState } from '../../../utils/types';
 import { SearchRecord } from './SearchRecord';
 import { NewRecordButton } from './NewRecordButton';
+import { RiEyeLine } from 'react-icons/ri';
+import { FiTrash2 } from 'react-icons/fi';
+import { EditRecord } from './EditRecord';
+import {
+  Flex,
+  IconButton,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from '@chakra-ui/react';
 
 interface Props {
   patientId: number;
@@ -30,8 +44,60 @@ export const PatientRecords: React.FC<Props> = ({
           setPatientData={setPatientData}
         />
       </Flex>
-      {patientData.records &&
-        patientData.records.map((record) => <p>{record.createdAt}</p>)}
+      <TableContainer mt={5}>
+        <Table variant='striped'>
+          <Thead>
+            <Tr>
+              <Th>Index</Th>
+              <Th>Created at</Th>
+              <Th>Edit</Th>
+              <Th>Delete</Th>
+              <Th>Preview</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {patientData.records &&
+              patientData.records
+                .filter((record) => {
+                  return moment(record.createdAt)
+                    .format('LLLL')
+                    .trim()
+                    .toLowerCase()
+                    .includes(searchQuery.trim().toLowerCase());
+                })
+                .map((record, idx) => (
+                  <Tr key={idx}>
+                    <Td>{idx + 1}</Td>
+                    <Td>{moment(record.createdAt).format('llll')}</Td>
+                    <Td>
+                      <EditRecord
+                        patientId={patientId}
+                        patientData={patientData}
+                        setPatientData={setPatientData}
+                        record={record}
+                      />
+                    </Td>
+                    <Td>
+                      <IconButton
+                        aria-label='delete'
+                        variant='ghost'
+                        colorScheme='red'
+                        icon={<FiTrash2 className='text-lg' />}
+                      />
+                    </Td>
+                    <Td>
+                      <IconButton
+                        aria-label='preview'
+                        variant='ghost'
+                        colorScheme='teal'
+                        icon={<RiEyeLine className='text-xl' />}
+                      />
+                    </Td>
+                  </Tr>
+                ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

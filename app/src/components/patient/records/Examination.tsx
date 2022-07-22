@@ -20,20 +20,50 @@ export const Examination: React.FC<Props> = ({
   setPatientRecord,
   loading,
 }) => {
-  const [generalExamination, setGeneralExamination] = useState('');
-  const [pulseRate, setPulseRate] = useState('');
-  const [systolic, setSystolic] = useState('');
-  const [diastolic, setDiastolic] = useState('');
-  const [temperature, setTemperature] = useState('');
-  const [respiratoryRate, setRespiratoryRate] = useState('');
-  const [oxygenSaturation, setOxygenSaturation] = useState('');
-  const [rs, setRs] = useState('');
-  const [cvs, setCvs] = useState('');
-  const [git, setGit] = useState('');
-  const [cns, setCns] = useState('');
-  const [musculoskeletal, setMusculoskeletal] = useState('');
-  const [ddsIfAny, setDdsIfAny] = useState('');
-  const [diagnosis, setDiagnosis] = useState<string[]>([]);
+  let patientExamination = patientRecord.examination;
+
+  const [generalExamination, setGeneralExamination] = useState(
+    patientExamination?.generalExamination || ''
+  );
+  const [pulseRate, setPulseRate] = useState(
+    patientExamination?.vitals?.pulseRate || ''
+  );
+  const [systolic, setSystolic] = useState(
+    patientExamination?.vitals?.bloodPressure?.systolic || ''
+  );
+  const [diastolic, setDiastolic] = useState(
+    patientExamination?.vitals?.bloodPressure?.diastolic || ''
+  );
+  const [temperature, setTemperature] = useState(
+    patientExamination?.vitals?.temperature || ''
+  );
+  const [respiratoryRate, setRespiratoryRate] = useState(
+    patientExamination?.vitals?.respiratoryRate || ''
+  );
+  const [oxygenSaturation, setOxygenSaturation] = useState(
+    patientExamination?.vitals?.oxygenSaturation || ''
+  );
+  const [rs, setRs] = useState(
+    patientExamination?.systemicExamination?.rs || ''
+  );
+  const [cvs, setCvs] = useState(
+    patientExamination?.systemicExamination?.cvs || ''
+  );
+  const [git, setGit] = useState(
+    patientExamination?.systemicExamination?.git || ''
+  );
+  const [cns, setCns] = useState(
+    patientExamination?.systemicExamination?.cns || ''
+  );
+  const [musculoskeletal, setMusculoskeletal] = useState(
+    patientExamination?.systemicExamination?.musculoskeletal || ''
+  );
+  const [ddsIfAny, setDdsIfAny] = useState(
+    patientExamination?.systemicExamination?.ddsIfAny || ''
+  );
+  const [diagnosis, setDiagnosis] = useState<string[]>(
+    patientExamination?.systemicExamination?.diagnosis || []
+  );
 
   useEffect(() => {
     const examination: PatientExamination = {
