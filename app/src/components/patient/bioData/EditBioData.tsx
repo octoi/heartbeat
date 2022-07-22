@@ -51,6 +51,7 @@ export const EditBioData: React.FC<Props> = ({
         sex,
         address,
       },
+      updatedAt: Date.now(),
     };
 
     invoke('update_patient', {
