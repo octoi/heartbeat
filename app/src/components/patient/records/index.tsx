@@ -3,11 +3,11 @@ import moment from 'moment';
 import { PatientData, SetState } from '../../../utils/types';
 import { SearchRecord } from './SearchRecord';
 import { NewRecordButton } from './NewRecordButton';
-import { RiEyeLine } from 'react-icons/ri';
 import { EditRecord } from './EditRecord';
+import { DeleteRecord } from './DeleteRecord';
+import { PreviewButton } from './PreviewButton';
 import {
   Flex,
-  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -16,7 +16,6 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import { DeleteRecord } from './DeleteRecord';
 
 interface Props {
   patientId: number;
@@ -86,11 +85,10 @@ export const PatientRecords: React.FC<Props> = ({
                       />
                     </Td>
                     <Td>
-                      <IconButton
-                        aria-label='preview'
-                        variant='ghost'
-                        colorScheme='teal'
-                        icon={<RiEyeLine className='text-xl' />}
+                      <PreviewButton
+                        patientCreatedAt={patientData.createdAt || 0}
+                        patientBioData={patientData.bioData || {}}
+                        patientRecord={record}
                       />
                     </Td>
                   </Tr>
