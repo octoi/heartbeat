@@ -81,6 +81,7 @@ export interface PatientData {
   bioData?: PatientBioData;
   records?: PatientRecord[];
   createdAt?: number;
+  updatedAt?: number;
 }
 
 export interface Patient {

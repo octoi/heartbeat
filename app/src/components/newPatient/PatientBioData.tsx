@@ -30,6 +30,7 @@ export const PatientBioDataForm: React.FC<Props> = ({ patientBioData }) => {
         address,
       },
       createdAt: Date.now(),
+      updatedAt: Date.now(),
     };
 
     invoke('create_patient', {
