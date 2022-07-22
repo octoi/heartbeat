@@ -62,7 +62,7 @@ export const EditRecord: React.FC<Props> = ({
     })
       .then(() => {
         toast({
-          title: 'Edited patient biodata successfully',
+          title: 'Edited patient record successfully',
           description: 'Latest changes in database',
           duration: 3000,
           isClosable: true,

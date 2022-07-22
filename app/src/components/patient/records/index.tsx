@@ -4,7 +4,6 @@ import { PatientData, SetState } from '../../../utils/types';
 import { SearchRecord } from './SearchRecord';
 import { NewRecordButton } from './NewRecordButton';
 import { RiEyeLine } from 'react-icons/ri';
-import { FiTrash2 } from 'react-icons/fi';
 import { EditRecord } from './EditRecord';
 import {
   Flex,
@@ -17,6 +16,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+import { DeleteRecord } from './DeleteRecord';
 
 interface Props {
   patientId: number;
@@ -78,11 +78,11 @@ export const PatientRecords: React.FC<Props> = ({
                       />
                     </Td>
                     <Td>
-                      <IconButton
-                        aria-label='delete'
-                        variant='ghost'
-                        colorScheme='red'
-                        icon={<FiTrash2 className='text-lg' />}
+                      <DeleteRecord
+                        patientId={patientId}
+                        patientData={patientData}
+                        setPatientData={setPatientData}
+                        currentRecordCreatedAt={record.createdAt || 0}
                       />
                     </Td>
                     <Td>
