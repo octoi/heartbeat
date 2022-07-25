@@ -14,6 +14,7 @@ import {
   DrawerCloseButton,
   useToast,
 } from '@chakra-ui/react';
+import { PreviewButton } from './PreviewButton';
 
 interface Props {
   patientData: PatientData;
@@ -57,6 +58,11 @@ export const NewRecordButton: React.FC<Props> = ({
   );
   const [loading, setLoading] = useState(false);
 
+  const closeDrawer = () => {
+    setRecord({});
+    onClose();
+  };
+
   const saveRecord = () => {
     let patientRecords = patientData.records || [];
 
@@ -86,7 +92,7 @@ export const NewRecordButton: React.FC<Props> = ({
         });
 
         setPatientData(patientUpdatedData);
-        onClose();
+        closeDrawer();
       })
       .catch((err) => {
         toast({
@@ -112,7 +118,7 @@ export const NewRecordButton: React.FC<Props> = ({
         isOpen={isOpen}
         placement='right'
         size='full'
-        onClose={onClose}
+        onClose={closeDrawer}
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
@@ -129,10 +135,16 @@ export const NewRecordButton: React.FC<Props> = ({
           </DrawerBody>
 
           <DrawerFooter>
-            <Button mr={3} onClick={onClose}>
+            <Button mr={3} onClick={closeDrawer}>
               Cancel
             </Button>
-            <Button colorScheme='blue' onClick={saveRecord}>
+            <PreviewButton
+              patientCreatedAt={patientData.createdAt || 0}
+              patientBioData={patientData.bioData || {}}
+              patientRecord={record}
+              useButton
+            />
+            <Button ml={3} colorScheme='blue' onClick={saveRecord}>
               Save
             </Button>
           </DrawerFooter>

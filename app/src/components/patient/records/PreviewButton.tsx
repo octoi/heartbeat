@@ -3,11 +3,12 @@ import { RiEyeLine } from 'react-icons/ri';
 import { PreviewContent } from '../preview';
 import { PatientBioData, PatientRecord } from '../../../utils/types';
 import {
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay,
+  Button,
   IconButton,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
 
@@ -15,37 +16,36 @@ interface Props {
   patientCreatedAt: number;
   patientBioData: PatientBioData;
   patientRecord: PatientRecord;
+  useButton?: boolean;
 }
 
 export const PreviewButton: React.FC<Props> = ({
   patientCreatedAt,
   patientBioData,
   patientRecord,
+  useButton,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const btnRef = React.useRef<any>();
-
   return (
     <>
-      <IconButton
-        aria-label='preview'
-        variant='ghost'
-        colorScheme='teal'
-        icon={<RiEyeLine className='text-xl' />}
-        onClick={onOpen}
-      />
-
-      <Drawer
-        isOpen={isOpen}
-        placement='right'
-        size='full'
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerBody>
+      {useButton ? (
+        <Button colorScheme='teal' onClick={onOpen}>
+          Preview
+        </Button>
+      ) : (
+        <IconButton
+          aria-label='preview'
+          variant='ghost'
+          colorScheme='teal'
+          icon={<RiEyeLine className='text-xl' />}
+          onClick={onOpen}
+        />
+      )}
+      <Modal size='full' isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalBody>
             <div className='mt-5' />
             <PreviewContent
               patientCreatedAt={patientCreatedAt}
@@ -53,9 +53,9 @@ export const PreviewButton: React.FC<Props> = ({
               patientRecord={patientRecord}
               onClose={onClose}
             />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
