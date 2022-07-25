@@ -70,7 +70,7 @@ export const NextAppointment: React.FC<Props> = ({
               withGlobalStyles
             >
               <Calendar
-                value={appointmentDate}
+                value={appointmentDate || new Date()}
                 onChange={setAppointmentDate}
                 amountOfMonths={3}
                 fullWidth

@@ -1,8 +1,10 @@
 import React from 'react';
+import moment from 'moment';
 import { PatientData, SetState } from '../../../utils/types';
 import { EditBioData } from './EditBioData';
+import { DeletePatient } from './DeletePatient';
+import { BsCalendar3 } from 'react-icons/bs';
 import { Avatar, Center, Flex, Text, useColorMode } from '@chakra-ui/react';
-import { DeletetBioData } from './DeletetBioData';
 
 interface Props {
   patientId: number;
@@ -19,6 +21,13 @@ export const BioData: React.FC<Props> = ({
 
   const bioData = patientData.bioData;
 
+  let nextAppointment =
+    patientData.records &&
+    patientData.records?.length > 0 &&
+    patientData.records[0].nextAppointment
+      ? patientData.records[0].nextAppointment
+      : null;
+
   return (
     <Flex
       direction='column'
@@ -31,21 +40,42 @@ export const BioData: React.FC<Props> = ({
       <Center>
         <Avatar name={bioData?.name} size='xl' />
       </Center>
-      <Text mt={5} fontSize='xl' fontWeight='medium'>
+      <Flex direction='row-reverse'>
+        <DeletePatient patientId={patientId} patientName={bioData?.name} />
+        <EditBioData
+          patientId={patientId}
+          patientData={patientData}
+          setPatientData={setPatientData}
+        />
+      </Flex>
+      <Text mt={3} fontSize='xl' fontWeight='medium'>
         {bioData?.name}
       </Text>
-      <Text mt={2} fontSize='lg'>
-        {bioData?.age} {bioData?.sex}
-      </Text>
-      <Text mt={2} fontSize='lg'>
-        {bioData?.address}
-      </Text>
-      <EditBioData
-        patientId={patientId}
-        patientData={patientData}
-        setPatientData={setPatientData}
-      />
-      <DeletetBioData patientId={patientId} patientName={bioData?.name} />
+      {(bioData?.age || bioData?.sex) && (
+        <Text mt={2} fontSize='lg'>
+          {bioData?.age} {bioData?.sex}
+        </Text>
+      )}
+      {bioData?.address && (
+        <Text mt={2} fontSize='lg'>
+          {bioData?.address}
+        </Text>
+      )}
+      {nextAppointment &&
+        (moment(nextAppointment).isAfter() ||
+          moment(nextAppointment).isSame(moment(), 'day')) && (
+          <Flex
+            mt={3}
+            direction='row'
+            alignItems='center'
+            className='opacity-80'
+          >
+            <BsCalendar3 />
+            <Text ml={2}>
+              {moment(nextAppointment).format('dddd, MMM D YYYY')}
+            </Text>
+          </Flex>
+        )}
     </Flex>
   );
 };

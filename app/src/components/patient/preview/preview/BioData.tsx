@@ -1,6 +1,6 @@
 import React from 'react';
 import { PatientBioData, PatientMedicalBioData } from '../../../../utils/types';
-import { checkString } from '../../../../utils/checkString';
+import { checkString } from '../../../../utils/check';
 import { getId } from '../../../../utils/getId';
 import {
   LightMode,

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PatientData, SetState } from '../../../utils/types';
 import { TextInput } from '../../common/TextInput';
+import { invoke } from '@tauri-apps/api/tauri';
+import { TbEdit } from 'react-icons/tb';
 import {
   useDisclosure,
   Modal,
@@ -14,8 +16,8 @@ import {
   useToast,
   SimpleGrid,
   Select,
+  IconButton,
 } from '@chakra-ui/react';
-import { invoke } from '@tauri-apps/api/tauri';
 
 interface Props {
   patientId: number;
@@ -88,9 +90,13 @@ export const EditBioData: React.FC<Props> = ({
 
   return (
     <>
-      <Button colorScheme='blue' mt={5} size='md' onClick={onOpen}>
-        Edit details
-      </Button>
+      <IconButton
+        aria-label='edit'
+        variant='ghost'
+        colorScheme='blue'
+        icon={<TbEdit className='text-xl' />}
+        onClick={onOpen}
+      />
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />

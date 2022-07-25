@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { invoke } from '@tauri-apps/api';
+import { FiTrash2 } from 'react-icons/fi';
 import {
   useDisclosure,
   Button,
@@ -11,6 +12,7 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   useToast,
+  IconButton,
 } from '@chakra-ui/react';
 
 interface Props {
@@ -18,7 +20,7 @@ interface Props {
   patientName?: string;
 }
 
-export const DeletetBioData: React.FC<Props> = ({ patientId, patientName }) => {
+export const DeletePatient: React.FC<Props> = ({ patientId, patientName }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const cancelRef = React.useRef<any>();
@@ -62,9 +64,13 @@ export const DeletetBioData: React.FC<Props> = ({ patientId, patientName }) => {
 
   return (
     <>
-      <Button colorScheme='red' mt={2} size='md' onClick={onOpen}>
-        Delete patient
-      </Button>
+      <IconButton
+        aria-label='delete'
+        variant='ghost'
+        colorScheme='red'
+        icon={<FiTrash2 className='text-lg' />}
+        onClick={onOpen}
+      />
 
       <AlertDialog
         isOpen={isOpen}

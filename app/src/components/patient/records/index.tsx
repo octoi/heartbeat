@@ -73,7 +73,7 @@ export const PatientRecords: React.FC<Props> = ({
                         patientId={patientId}
                         patientData={patientData}
                         setPatientData={setPatientData}
-                        record={record}
+                        recordCreatedAt={record.createdAt || 0}
                       />
                     </Td>
                     <Td>

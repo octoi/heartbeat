@@ -22,14 +22,14 @@ interface Props {
   patientId: number;
   patientData: PatientData;
   setPatientData: SetState<PatientData>;
-  record: PatientRecord;
+  recordCreatedAt: number;
 }
 
 export const EditRecord: React.FC<Props> = ({
   patientId,
   patientData,
   setPatientData,
-  record: currentRecord,
+  recordCreatedAt,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -37,7 +37,9 @@ export const EditRecord: React.FC<Props> = ({
 
   const btnRef = React.useRef<any>();
 
-  const [record, setRecord] = useState<PatientRecord>(currentRecord);
+  const [record, setRecord] = useState<PatientRecord>(
+    patientData.records?.filter((x) => x.createdAt == recordCreatedAt)[0] || {}
+  );
   const [loading, setLoading] = useState(false);
 
   const editRecord = () => {

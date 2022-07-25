@@ -1,9 +1,9 @@
 import React from 'react';
 import { Center } from '@chakra-ui/react';
 import { WaterMark } from './WaterMark';
-import { BioData } from './bioData';
+import { BioData } from './BioData';
 import { Examination } from './Examination';
-import { Advice } from './advice';
+import { Advice } from './Advice';
 import { Footer } from './Footer';
 import { PatientBioData, PatientRecord } from '../../../../utils/types';
 
