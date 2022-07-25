@@ -110,7 +110,12 @@ export const DeleteRecord: React.FC<Props> = ({
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme='red' onClick={deleteRecord} ml={3}>
+              <Button
+                colorScheme='red'
+                onClick={deleteRecord}
+                isLoading={loading}
+                ml={3}
+              >
                 Delete record
               </Button>
             </AlertDialogFooter>
