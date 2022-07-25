@@ -78,7 +78,7 @@ export const BioData: React.FC<Props> = ({
         </Text>
       )}
       {medicalBioData.allergyToMedicine?.medicines && (
-        <OrderedList mt={2} ml={5}>
+        <OrderedList mt={2}>
           {medicalBioData.allergyToMedicine?.medicines
             .split('\n')
             .map((medicineName, idx) => (
@@ -96,7 +96,7 @@ export const BioData: React.FC<Props> = ({
           </Text>
         </div>
       )}
-      {diagnosis && (
+      {diagnosis.length !== 0 && (
         <div className='mt-3'>
           <h2 className='text-xl font-medium'>DIAGNOSIS</h2>
           <OrderedList mt={2}>
