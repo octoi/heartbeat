@@ -46,7 +46,7 @@ export const PatientContent: React.FC<Props> = ({ patientId }) => {
 
   return (
     <div>
-      <Header title={patientData.bioData?.name || ''} />
+      <Header title={patientData.bioData?.name || ''} disableConfirm />
       <Flex mt={5}>
         {loading && <p>Loading ...</p>}
         {!loading && (

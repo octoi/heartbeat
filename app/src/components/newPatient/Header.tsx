@@ -18,9 +18,10 @@ import {
 
 interface Props {
   title: string;
+  disableConfirm?: boolean;
 }
 
-export const Header: React.FC<Props> = ({ title }) => {
+export const Header: React.FC<Props> = ({ title, disableConfirm }) => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef() as React.MutableRefObject<any>;
@@ -40,7 +41,7 @@ export const Header: React.FC<Props> = ({ title }) => {
         icon={<CgClose />}
         colorScheme='red'
         size='md'
-        onClick={onOpen}
+        onClick={disableConfirm ? redirect : onOpen}
       />
       <AlertDialog
         isOpen={isOpen}
