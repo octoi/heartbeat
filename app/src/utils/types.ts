@@ -74,6 +74,7 @@ export interface PatientRecord {
   medicalBioData?: PatientMedicalBioData;
   examination?: PatientExamination;
   advice?: PatientAdvice;
+  nextAppointment?: number;
   createdAt?: number;
 }
 
