@@ -16,6 +16,7 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import { PreviewButton } from './PreviewButton';
 
 interface Props {
   patientId: number;
@@ -122,7 +123,13 @@ export const EditRecord: React.FC<Props> = ({
             <Button mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme='blue' onClick={editRecord}>
+            <PreviewButton
+              patientCreatedAt={patientData.createdAt || 0}
+              patientBioData={patientData.bioData || {}}
+              patientRecord={record}
+              useButton
+            />
+            <Button ml={3} colorScheme='blue' onClick={editRecord}>
               Save
             </Button>
           </DrawerFooter>
