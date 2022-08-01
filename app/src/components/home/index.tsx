@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { invoke } from '@tauri-apps/api/tauri';
+import { Header } from './Header';
 import { Patient, PatientData } from '../../utils/types';
-import { Header } from './header';
-import { Patients } from './patients';
 import { useToast } from '@chakra-ui/react';
+import { invoke } from '@tauri-apps/api/tauri';
+import { Patients } from './Patients';
+import moment from 'moment';
 import { getId } from '../../utils/getId';
 
 export const HomePageContent: React.FC = () => {
   const toast = useToast();
 
+  const [searchQuery, setSearchQuery] = useState('');
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -19,9 +20,23 @@ export const HomePageContent: React.FC = () => {
     invoke('read_patients')
       .then((rawData: any) => {
         var data: Patient[] = rawData;
+
         setPatients(
           data.sort(function (a, b) {
-            return JSON.parse(b.data).updatedAt - JSON.parse(a.data).updatedAt;
+            let aParsed: PatientData = JSON.parse(a.data);
+            let bParsed: PatientData = JSON.parse(b.data);
+
+            let aDate =
+              (aParsed.records != undefined
+                ? aParsed.records[0].createdAt
+                : aParsed.createdAt) || 1;
+
+            let bDate =
+              (bParsed.records != undefined
+                ? bParsed.records[0].createdAt
+                : bParsed.createdAt) || 2;
+
+            return bDate - aDate;
           })
         );
       })
@@ -42,16 +57,38 @@ export const HomePageContent: React.FC = () => {
 
   return (
     <section>
-      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Header
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        appointedPatients={patients.filter((patient) => {
+          let patientData: PatientData = JSON.parse(patient.data);
+          let nextAppointment =
+            patientData.records &&
+            patientData.records?.length > 0 &&
+            patientData.records[0].nextAppointment
+              ? patientData.records[0].nextAppointment
+              : null;
+
+          if (
+            nextAppointment &&
+            (moment(nextAppointment).isSame(moment(), 'day') ||
+              moment(nextAppointment).isSame(moment().add(1, 'day'), 'day'))
+          ) {
+            return patient;
+          }
+        })}
+      />
       <Patients
         loading={loading}
         patients={patients.filter((patient) => {
-          const patientData: PatientData = JSON.parse(patient.data);
+          let patientData: PatientData = JSON.parse(patient.data);
           return (
             patientData.bioData?.name
               ?.toLowerCase()
-              .includes(searchQuery.toLowerCase()) ||
-            getId(patientData.createdAt || 0) === searchQuery.trim()
+              .trim()
+              .includes(searchQuery.toLowerCase().trim()) ||
+            // patient.id.toString() === searchQuery.trim()
+            getId(patientData.createdAt || 0).includes(searchQuery.trim())
           );
         })}
       />

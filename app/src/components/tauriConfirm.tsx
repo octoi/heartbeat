@@ -1,6 +1,6 @@
-import React from "react";
-import { ReactComponent } from "../utils/types";
-import { appWindow } from "@tauri-apps/api/window";
+import React from 'react';
+import { ReactComponent } from '../utils/types';
+import { appWindow } from '@tauri-apps/api/window';
 import {
   AlertDialog,
   AlertDialogBody,
@@ -10,7 +10,7 @@ import {
   AlertDialogOverlay,
   Button,
   useDisclosure,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 export const TauriConfirm: ReactComponent = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,7 +20,7 @@ export const TauriConfirm: ReactComponent = ({ children }) => {
 
   const closeWindow = async () => {
     await appWindow.close();
-  }
+  };
 
   return (
     <>
@@ -34,19 +34,19 @@ export const TauriConfirm: ReactComponent = ({ children }) => {
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
               Are you sure ?
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure? Do you want to close this amazing app.
+              Are you sure? Do you want to close this app.
             </AlertDialogBody>
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={closeWindow} ml={3}>
+              <Button colorScheme='red' onClick={closeWindow} ml={3}>
                 Close
               </Button>
             </AlertDialogFooter>
