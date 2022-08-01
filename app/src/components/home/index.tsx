@@ -4,6 +4,8 @@ import { Patient, PatientData } from '../../utils/types';
 import { useToast } from '@chakra-ui/react';
 import { invoke } from '@tauri-apps/api/tauri';
 import { Patients } from './Patients';
+import moment from 'moment';
+import { getId } from '../../utils/getId';
 
 export const HomePageContent: React.FC = () => {
   const toast = useToast();
@@ -55,7 +57,27 @@ export const HomePageContent: React.FC = () => {
 
   return (
     <section>
-      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Header
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        appointedPatients={patients.filter((patient) => {
+          let patientData: PatientData = JSON.parse(patient.data);
+          let nextAppointment =
+            patientData.records &&
+            patientData.records?.length > 0 &&
+            patientData.records[0].nextAppointment
+              ? patientData.records[0].nextAppointment
+              : null;
+
+          if (
+            nextAppointment &&
+            (moment(nextAppointment).isSame(moment(), 'day') ||
+              moment(nextAppointment).isSame(moment().add(1, 'day'), 'day'))
+          ) {
+            return patient;
+          }
+        })}
+      />
       <Patients
         loading={loading}
         patients={patients.filter((patient) => {
@@ -65,7 +87,8 @@ export const HomePageContent: React.FC = () => {
               ?.toLowerCase()
               .trim()
               .includes(searchQuery.toLowerCase().trim()) ||
-            patient.id.toString() === searchQuery.trim()
+            // patient.id.toString() === searchQuery.trim()
+            getId(patientData.createdAt || 0).includes(searchQuery.trim())
           );
         })}
       />

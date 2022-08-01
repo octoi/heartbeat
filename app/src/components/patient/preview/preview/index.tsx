@@ -8,6 +8,7 @@ import { Footer } from './Footer';
 import { PatientBioData, PatientRecord } from '../../../../utils/types';
 
 interface Props {
+  patientCreatedAt: number;
   patientBioData: PatientBioData;
   patientRecord: PatientRecord;
   printContentRef: React.MutableRefObject<any>;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const Preview: React.FC<Props> = ({
+  patientCreatedAt,
   patientBioData,
   patientRecord,
   printContentRef,
@@ -31,9 +33,9 @@ export const Preview: React.FC<Props> = ({
           <div className='w-full bg-black h-0.5 opacity-20 my-5' />
 
           <BioData
+            patientCreatedAt={patientCreatedAt}
             bioData={patientBioData || {}}
             medicalBioData={patientRecord.medicalBioData || {}}
-            createdAt={patientRecord.createdAt || Date.now()}
             tableVariant={tableVariant}
             diagnosis={
               patientRecord.examination?.systemicExamination?.diagnosis || []

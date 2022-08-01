@@ -61,6 +61,7 @@ export const PreviewContent: React.FC<Props> = ({
         onClose={onClose}
       />
       <Preview
+        patientCreatedAt={patientCreatedAt}
         patientBioData={patientBioData || {}}
         patientRecord={patientRecord}
         printContentRef={printContentRef}

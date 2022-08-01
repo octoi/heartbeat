@@ -3,15 +3,21 @@ import { Button, Flex, Input } from '@chakra-ui/react';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { LogoDrawer } from '../logoDrawer';
 import { Link } from 'react-router-dom';
-import { SetState } from '../../utils/types';
+import { Patient, SetState } from '../../utils/types';
 import { Paths } from '../../utils/paths';
+import { Appointments } from './Appointments';
 
 interface Props {
   searchQuery: string;
   setSearchQuery: SetState<string>;
+  appointedPatients: Patient[];
 }
 
-export const Header: React.FC<Props> = ({ searchQuery, setSearchQuery }) => {
+export const Header: React.FC<Props> = ({
+  searchQuery,
+  setSearchQuery,
+  appointedPatients,
+}) => {
   return (
     <Flex alignItems='center'>
       <LogoDrawer />
@@ -20,11 +26,11 @@ export const Header: React.FC<Props> = ({ searchQuery, setSearchQuery }) => {
         type='text'
         variant='filled'
         size='md'
-        mx={3}
+        mx={2}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-
+      <Appointments appointedPatients={appointedPatients} />
       <Link to={Paths.NewPatient}>
         <Button size='md' colorScheme='teal'>
           <IoMdPersonAdd className='mr-2' />

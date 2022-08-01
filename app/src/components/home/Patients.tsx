@@ -15,6 +15,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+import { getId } from '../../utils/getId';
 
 interface Props {
   patients: Patient[];
@@ -46,7 +47,7 @@ export const Patients: React.FC<Props> = ({ patients, loading }) => {
                 return (
                   <Tr key={patient.id}>
                     <Td>{idx + 1}</Td>
-                    <Td>{patient.id}</Td>
+                    <Td>{getId(patientData.createdAt || 0)}</Td>
                     <Td>
                       <Avatar
                         name={patientData?.bioData?.name}

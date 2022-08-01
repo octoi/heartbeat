@@ -16,17 +16,17 @@ import {
 } from '@chakra-ui/react';
 
 interface Props {
+  patientCreatedAt: number;
   bioData: PatientBioData;
   medicalBioData: PatientMedicalBioData;
   diagnosis: string[];
-  createdAt: number;
   tableVariant: string;
 }
 
 export const BioData: React.FC<Props> = ({
   bioData,
   medicalBioData,
-  createdAt,
+  patientCreatedAt,
   tableVariant,
   diagnosis,
 }) => {
@@ -45,7 +45,7 @@ export const BioData: React.FC<Props> = ({
           </Thead>
           <Tbody>
             <Tr>
-              <Td>{getId(createdAt)}</Td>
+              <Td>{getId(patientCreatedAt)}</Td>
               {bioData.name && <Td>{bioData.name}</Td>}
               {bioData.age && (
                 <Td>
